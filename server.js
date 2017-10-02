@@ -46,7 +46,7 @@ app.use(passport.session());
 
 
 app.get('/', function(req, res){
-  res.send('Craigslist Clone');
+  res.send('Craigslist');
 });
 
 // Display 404 for unrecognized Routes
