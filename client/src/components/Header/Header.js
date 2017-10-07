@@ -1,9 +1,13 @@
 import React from 'react';
+import {HeaderNavigation} from "./"
 
 class Header extends React.Component {
   render(){
     return (
-      <h1>Header Component</h1>
+      <div>
+        <h1>Header Component</h1>
+        <HeaderNavigation />
+      </div>
     )
   }
 }
