@@ -6,9 +6,8 @@ const LocalStrategy = require('passport-local').Strategy;
 
 
 const app = xps.app();
-let PORT = process.env.PORT || 3000;
 
-console.log("SERVER STARTED")
+let PORT = process.env.PORT || 3001;
 
 xps.go(app,
   {
@@ -19,7 +18,6 @@ xps.go(app,
     cookieParse: true,
     flash: true,
     httpLogger: "morgan",
-    //port: 3000, // Either an INT or STRING
   }
 )
 
@@ -45,14 +43,6 @@ app.use(passport.session());
 // app.use("/", register)
 
 
-app.get('/', function(req, res){
-  let cookieId = res.cookie('cookieId', "Hi Saveliy", { maxAge: 900000, httpOnly: true })
-  let cookie2 = res.cookie('cookie2', "Hi You", { maxAge: 900000, httpOnly: true })
-  console.log(req.cookies.cookieId)
-  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.ip;
-  var we = `${ip}`;
-  res.send('CL ' + we);
-});
 
 // Display 404 for unrecognized Routes
 app.get('*', function(req, res){
