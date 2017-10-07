@@ -46,12 +46,18 @@ app.use(passport.session());
 
 
 app.get('/', function(req, res){
-  res.send('Craigslist');
+  let cookieId = res.cookie('cookieId', "Hi Saveliy", { maxAge: 900000, httpOnly: true })
+  let cookie2 = res.cookie('cookie2', "Hi You", { maxAge: 900000, httpOnly: true })
+  console.log(req.cookies.cookieId)
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.ip;
+  var we = `${ip}`;
+  res.send('CL ' + we);
 });
 
 // Display 404 for unrecognized Routes
 app.get('*', function(req, res){
   res.send('404');
+  console.log(req.cookies.cookieId)
 });
 
 
