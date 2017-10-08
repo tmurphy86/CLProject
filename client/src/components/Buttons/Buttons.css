@@ -1,0 +1,24 @@
+a.clButton{
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  border-radius: 6px;
+  font-size: .88rem;
+  font-weight: 600;
+}
+
+a.PrimaryButton{
+  background: #33a6e2;
+  color:#fff;
+  padding: 15px 30px;
+}
+
+
+a.PrimaryButton:hover{
+  background: #208ec7;
+  transition: .5s;
+  color:#fff;
+  -moz-box-shadow:     0px 5px 40px 0px #b7d1d6;
+  -webkit-box-shadow:  0px 5px 40px 0px #b7d1d6;
+  box-shadow:         0px 5px 40px 0px #b7d1d6;
+}

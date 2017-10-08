@@ -1,4 +1,5 @@
 import React from 'react';
+import PrimaryButton from '../Buttons/PrimaryButton.js'
 
 
 class HeaderNavigation extends React.Component {
@@ -12,7 +13,7 @@ class HeaderNavigation extends React.Component {
           <a href="/#">Register</a>
         </li>
         <li>
-          <a href="/#">Search Results</a>
+          <PrimaryButton href="/">post an ad</PrimaryButton>
         </li>
       </ul>
     )

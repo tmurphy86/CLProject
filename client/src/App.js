@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Header, Search} from "./components"
+import {Header, Search, PrimaryButton} from "./components"
 import './App.css';
 
 class App extends Component {
