@@ -1,3 +1,4 @@
+require('dotenv-safe').load();
 const path = require('path')
 const xps = require("./xps.js")
 const session = require('express-session')
