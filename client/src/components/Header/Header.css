@@ -1,11 +1,41 @@
-.Header-logo{
-  width:25px;
-  height:25px;
-  opacity:0.4;
-  cursor: pointer;
+.Header{
+  position: relative;
+  float: left;
+  width: 100%;
+  height: 105px;
+  line-height: 105px;
 }
 
-.Header-logo:hover{
-  opacity: 1;
+.Header-logo{
+  position: relative;
+  float: left;
+  width:25px;
+  height:25px;
+  padding-top:38px;
+  padding-right: 25px;
+}
+
+.Header-logo-block{
+  position: relative;
+  float: left;
+  font-weight: 800;
+  width:50%;
+  opacity:0.4;
+  cursor: pointer;
+  font-size:1.3rem;
+}
+
+.Header-logo-block:hover{
+  opacity:1;
   transition: .5s;
+}
+
+.Header-navigation{
+  position: relative;
+  float: right;
+}
+
+.Header-navigation li{
+  display: inline;
+  margin: 20px;
 }

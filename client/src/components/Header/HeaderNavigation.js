@@ -4,7 +4,7 @@ import React from 'react';
 class HeaderNavigation extends React.Component {
   render(){
     return(
-      <ul>
+      <ul className="Header-navigation">
         <li>
           <a href="/#">Login</a>
         </li>

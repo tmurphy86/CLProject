@@ -6,9 +6,11 @@ import logo from './clLogo.svg';
 class Header extends React.Component {
   render(){
     return (
-      <div>
-        <img src={logo} className="Header-logo" alt="logo" />
-        <h1 className="bold-text">CRAIGSLIST</h1>
+      <div className="Header">
+        <div className="Header-logo-block">
+          <img src={logo} className="Header-logo" alt="logo" />
+          <h1 className="bold-text">CRAIGSLIST</h1>
+        </div>
         <HeaderNavigation />
       </div>
     )
