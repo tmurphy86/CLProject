@@ -12,7 +12,7 @@
   width:25px;
   height:25px;
   padding-top:38px;
-  padding-right: 25px;
+  padding-right: 17px;
 }
 
 .Header-logo-block{
@@ -38,4 +38,7 @@
 .Header-navigation li{
   display: inline;
   margin: 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: .88rem;
 }
