@@ -1,0 +1,11 @@
+.Header-logo{
+  width:25px;
+  height:25px;
+  opacity:0.4;
+  cursor: pointer;
+}
+
+.Header-logo:hover{
+  opacity: 1;
+  transition: .5s;
+}
