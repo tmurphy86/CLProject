@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true
         },
         postbody: {
-            type: DataTypes.BLOB,
+            type: DataTypes.TEXT,
             allowNull: false
         },
         address: {
@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true
         },
         phone: {
-            type: DataTypes.INT,
+            type: DataTypes.INTEGER,
             allowNull: true
         },
         price: {
@@ -49,7 +49,7 @@ module.exports = function(sequelize, DataTypes) {
 
     Posts.associate = function(models) {
         Posts.belongsTo(models.user, {});
-        Posts.belongsTo(models.categories{});
+        Posts.belongsTo(models.categories, {});
     };
 
     return Posts;
