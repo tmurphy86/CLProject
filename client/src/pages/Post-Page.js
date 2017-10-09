@@ -22,8 +22,12 @@ class PostPage extends React.Component {
 
   componentWillMount(){
 
-    PostsAPI.grabPostData()
+    const postId = this.props.match.params.postId;
+
+    PostsAPI.grabPostData(postId)
     .then( res => {
+
+      console.log(this.state.postId)
 
       this.setState({
         postId:res.data.id,
@@ -38,6 +42,8 @@ class PostPage extends React.Component {
         postPhone:res.data.phone,
         postObo:false
       })
+
+      console.log(this.state.postId)
 
     })
     .catch(err => console.log(err));

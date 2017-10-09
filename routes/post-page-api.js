@@ -9,6 +9,8 @@ router.get("/:id", (req, res)=>{
 
   const postId = parseInt(req.params.id);
 
+  console.log("-------------------------------------", postId)
+
   grabPostData(postId, (postData)=>{
 
     if(postData){ // <----- If record found.
