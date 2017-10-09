@@ -38,7 +38,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       defaultValue: '#607d8b'
     },
-  }
+  });
 
 
   return User;

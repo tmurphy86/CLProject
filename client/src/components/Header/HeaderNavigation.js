@@ -7,6 +7,9 @@ class HeaderNavigation extends React.Component {
     return(
       <ul className="Header-navigation">
         <li>
+          <a href="/region/forsale/category/post/2">test post page</a>
+        </li>
+        <li>
           <a href="/#">Login</a>
         </li>
         <li>
