@@ -53,7 +53,7 @@ app.use(passport.session());
 
 // Register
 let post_Page = require(path.join(__dirname, "routes/post-page-api.js"))
-app.use("/region/forsale/category/post", post_Page)
+app.use("/region/forsale/category/post/", post_Page)
 
 
 

@@ -4,7 +4,7 @@ export default{
 
   grabPostData: (postId) => {
 
-    return axios.get("/region/forsale/category/post/2");
+    return axios.get("/region/forsale/category/post/"+postId);
 
   },
 
