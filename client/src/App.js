@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Header, Search} from "./components"
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {Header, Search} from "./components";
+import {PostPage} from "./pages";
 import './App.css';
 
 class App extends Component {
@@ -8,6 +10,12 @@ class App extends Component {
       <div className="App">
         <Header />
         <Search />
+        <Router>
+          <Switch>
+            <Route exact path="/" />
+            <Route path="/region/forsale/category/post/:postId" component={PostPage} />
+          </Switch>
+        </Router>
       </div>
     );
   }

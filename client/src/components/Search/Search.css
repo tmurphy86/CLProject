@@ -1,0 +1,64 @@
+.Search-form{
+  position: relative;
+  float: left;
+  width: 100%;
+  font-size:1.5rem;
+  margin-top: 45px;
+}
+
+.Search-form input, .Search-form .newLocation{
+  border:none;
+  border-bottom:1px solid #d2dde2;
+  outline: none;
+  background: none;
+  line-height: 60px;
+}
+
+.Search-form span{
+  position: relative;
+  float: left;
+  padding:0 35px;
+  line-height: 60px;
+}
+
+.Search-form input{
+  position: relative;
+  float: left;
+  width:55%;
+  padding-left: 40px;
+  font-size:1.5rem;
+  color: #6b8c9d;
+}
+
+.Search-form .newLocation{
+  position: relative;
+  float: right;
+  width:36%;
+}
+
+.Search-form .newLocation i{
+  margin-right:20px;
+}
+
+.Search-form input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #b4c3c8;
+  font-size:1.5rem;
+}
+.Search-form input::-moz-placeholder { /* Firefox 19+ */
+  color: #b4c3c8;
+  font-size:1.5rem;
+}
+.Search-form input:-ms-input-placeholder { /* IE 10+ */
+  color: #b4c3c8;
+  font-size:1.5rem;
+}
+.Search-form input:-moz-placeholder { /* Firefox 18- */
+  color: #b4c3c8;
+  font-size:1.5rem;
+}
+
+.Search-form .searchIcon{
+  position: absolute;
+  left:0;
+  top:25%;
+}
