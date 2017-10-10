@@ -33,6 +33,16 @@ Testing:
 
 starting `node `
 
+Update your local .env at the top level with the following local information:
+NODE_ENV=
+
+DB_DIALECT=
+DB_USERNAME=
+DB_PASSWORD=
+DB_DATABASE=
+DB_HOST=
+DB_PORT=
+
 ## [Documentation](#documentation)
 <a name="documentation"></a>
 
