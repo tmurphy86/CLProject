@@ -9,7 +9,7 @@ var config    = process.env;
 var db        = {};
 
 if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable]);
+  var sequelize = new Sequelize(config.JAWS_DATABASE, config.JAWS_USERNAME, config.JAWS_PASSWORD, {host: config.JAWS_HOST, port: config.JAWS_PORT, dialect: config.JAWS_DIALECT});
 } else {
   var sequelize = new Sequelize(config.DB_DATABASE, config.DB_USERNAME, config.DB_PASSWORD, {host: config.DB_HOST, port: config.DB_PORT, dialect: config.DB_DIALECT});
 }
