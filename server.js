@@ -13,12 +13,8 @@ let PORT = process.env.PORT || 3001;
 
 xps.go(app,
   {
-    staticView: "public", // Also takes an array of strings for multiple view folders.
-    viewEngine: "express-handlebars",
-    bodyParse: ["json", "raw", "urlencoded", "text"], // TRUE or [ARRAY]
     validator: true,
     cookieParse: true,
-    flash: true,
     httpLogger: "morgan",
   }
 )
