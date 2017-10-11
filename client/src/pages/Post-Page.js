@@ -1,5 +1,6 @@
 import React from 'react';
-import {PostsAPI} from '../api'
+import { Col, Row, Container } from "../components/Grid";
+import {PostsAPI} from '../api';
 
 class PostPage extends React.Component {
   constructor(){
