@@ -58,21 +58,20 @@ class PostPage extends React.Component {
         <Container>
           <Row>
             <Col size="md-12">
-              <h1>PostPage</h1>
-              <div>{this.state.postId}</div>
-              <div>{this.state.postTitle}</div>
+              <h1>{this.state.postTitle}{this.state.postId}</h1>
+              <h1>${this.state.postPrice}</h1>
+            </Col>
+            <Col size="md-8">
+                <div>{this.state.postBody}</div>
+            </Col>
+            <Col size="md-3">
               <div>{this.state.postZip}</div>
-              <div>{this.state.postBody}</div>
               <div>{this.state.postLocation}</div>
-              <div>{this.state.postPrice}</div>
               <div>
                 {(() => {
-                  if(!this.state.postAddress){
-                    return "NO ADDRESS"
-                  } else {
-                    return "HAS ADDRESS" + this.state.postAddress;
+                  if(this.state.postAddress){
+                    return this.state.postAddress
                   }
-
                 })()}
               </div>
             </Col>

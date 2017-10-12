@@ -31,7 +31,7 @@ router.get("/:id", (req, res)=>{
       postObject.name = postData.name;
       postObject.zip = postData.zip;
       postObject.postbody = postData.postbody;
-      postObject.price = postData.price;
+      postObject.price = numberWithCommas(postData.price);
       postObject.userId = postData.userId;
       postObject.createdAt = postData.createdAt;
 
@@ -86,4 +86,8 @@ function grabPostData(id, callback){
 
   });
 
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
