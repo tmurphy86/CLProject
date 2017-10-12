@@ -1,4 +1,5 @@
 import React from 'react';
+import {Content} from "../components/Content";
 import { Col, Row, Container } from "../components/Grid";
 import {PostsAPI} from '../api';
 
@@ -53,25 +54,31 @@ class PostPage extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>PostPage</h1>
-        <div>{this.state.postId}</div>
-        <div>{this.state.postTitle}</div>
-        <div>{this.state.postZip}</div>
-        <div>{this.state.postBody}</div>
-        <div>{this.state.postLocation}</div>
-        <div>{this.state.postPrice}</div>
-        <div>
-          {(() => {
-              if(!this.state.postAddress){
-                return "NO ADDRESS"
-              } else {
-                return "HAS ADDRESS" + this.state.postAddress;
-              }
+      <Content>
+        <Container>
+          <Row>
+            <Col size="md-12">
+              <h1>PostPage</h1>
+              <div>{this.state.postId}</div>
+              <div>{this.state.postTitle}</div>
+              <div>{this.state.postZip}</div>
+              <div>{this.state.postBody}</div>
+              <div>{this.state.postLocation}</div>
+              <div>{this.state.postPrice}</div>
+              <div>
+                {(() => {
+                  if(!this.state.postAddress){
+                    return "NO ADDRESS"
+                  } else {
+                    return "HAS ADDRESS" + this.state.postAddress;
+                  }
 
-          })()}
-        </div>
-      </div>
+                })()}
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </Content>
     )
   }
 }
