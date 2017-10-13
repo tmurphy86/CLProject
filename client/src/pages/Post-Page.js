@@ -1,7 +1,10 @@
 import React from 'react';
 import {Content} from "../components/Content";
+import {Search} from "../components/Search";
 import { Col, Row, Container } from "../components/Grid";
+import {SidebarButton} from "../components/Buttons"
 import {PostsAPI} from '../api';
+import "./Post-Page.css"
 
 class PostPage extends React.Component {
   constructor(){
@@ -58,13 +61,23 @@ class PostPage extends React.Component {
         <Container>
           <Row>
             <Col size="md-12">
-              <h1>{this.state.postTitle}{this.state.postId}</h1>
-              <h1>${this.state.postPrice}</h1>
+              <Search />
+            </Col>
+            <Col size="md-12">
+              <Row>
+                <Col size="md-8">
+                  <h1 className="post-title">{this.state.postTitle}</h1>
+                </Col>
+                <Col size="md-3">
+                  <h1 className="post-price text-center">{this.state.postPrice}</h1>
+                </Col>
+              </Row>
             </Col>
             <Col size="md-8">
-                <div>{this.state.postBody}</div>
+              <div>{this.state.postBody}</div>
             </Col>
             <Col size="md-3">
+              <SidebarButton href="/#" postId={this.state.postId}><i className="fa fa-heart-o" aria-hidden="true"></i>Add to Favorites</SidebarButton>
               <div>{this.state.postZip}</div>
               <div>{this.state.postLocation}</div>
               <div>

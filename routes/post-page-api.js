@@ -31,7 +31,7 @@ router.get("/:id", (req, res)=>{
       postObject.name = postData.name;
       postObject.zip = postData.zip;
       postObject.postbody = postData.postbody;
-      postObject.price = numberWithCommas(postData.price);
+      postObject.price = "$"+numberWithCommas(postData.price);
       postObject.userId = postData.userId;
       postObject.createdAt = postData.createdAt;
 

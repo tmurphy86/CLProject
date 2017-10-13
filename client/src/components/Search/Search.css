@@ -3,7 +3,7 @@
   float: left;
   width: 100%;
   font-size:1.5rem;
-  margin-top: 45px;
+  margin-bottom:65px;
 }
 
 .Search-form input, .Search-form .newLocation{
@@ -19,6 +19,7 @@
   float: left;
   padding:0 35px;
   line-height: 60px;
+  opacity:.5;
 }
 
 .Search-form input{
