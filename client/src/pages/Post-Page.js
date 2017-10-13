@@ -1,5 +1,5 @@
 import React from 'react';
-import {PostsAPI} from '../api'
+import {PostsAPI} from '../API'
 
 class PostPage extends React.Component {
   constructor(){

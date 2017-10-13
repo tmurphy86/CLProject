@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import {Header, Search} from "./components";
-import {PostPage} from "./pages";
+import {Header, Search} from "./Components";
+import { LoginPage, SignUpPage } from './Containers';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+// const muiThemebtn = getMuiTheme()
+// import {PostPage} from "./Pages";
 import './App.css';
+import routes from './routes';
 
 class App extends Component {
+  // state = {
+  //   authenticated
+  // }
   render() {
     return (
+      <MuiThemeProvider>
       <div className="App">
         <Header />
         <Search />
-        <Router>
-          <Switch>
-            <Route exact path="/" />
-            <Route path="/region/forsale/category/post/:postId" component={PostPage} />
-          </Switch>
-        </Router>
+        <LoginPage />
+        <Router routes={routes}/>
+
       </div>
+      </MuiThemeProvider>
     );
   }
 }
