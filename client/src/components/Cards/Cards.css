@@ -1,0 +1,25 @@
+.ContentCard{
+  background: #fff;
+  border-radius: 5px;
+  -moz-box-shadow:     0px 0px 40px 0px #bfcbce;
+  -webkit-box-shadow:  0px 0px 40px 0px #bfcbce;
+  box-shadow:         0px 0px 40px 0px #bfcbce;
+  margin-bottom:45px;
+  color: #557281;
+  overflow: hidden;
+}
+
+.ContentCardBody, .ContentCardHeader{
+  position: relative;
+  float: left;
+  font-size: 1.1rem;
+  width: 100%;
+}
+
+.ContentCardHeader{
+  padding:20px 20px 5px;
+}
+
+.ContentCardBody{
+  padding: 30px;
+}
