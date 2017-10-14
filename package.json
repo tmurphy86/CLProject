@@ -14,6 +14,7 @@
   "author": "Saveliy Samoylov, Tim Murphy, Olga Anderjaska",
   "license": "ISC",
   "dependencies": {
+    "@google/maps": "^0.4.5",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
     "connect-flash": "^0.1.1",
