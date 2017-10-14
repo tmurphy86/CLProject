@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SignUp from '../Components/Login/SignUp';
+import './index.css';
 
 
 class SignUpPage extends React.Component {

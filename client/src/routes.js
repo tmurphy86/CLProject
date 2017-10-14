@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+
 
 // import App from './Components/app';
 // import NotFoundPage from './Components/pages/not-found-page';
@@ -10,13 +11,15 @@ import { LoginPage, SignUpPage } from './Containers';
 
 
 const routes = (
-  <Route path="/" component={Base}>
-    <Route path="login" component={LoginPage} />
-    <Route path="users" component={SignUpPage}>
-      {/* <Route path="/user/:userId" component={User} /> */}
-    </Route>
-    <Route path="*" component={SignUpPage} />
-  </Route>
+  <Router>
+  <Switch>
+  <Route path="/" exact component={SignUpPage} />
+  <Route path="/login" component={LoginPage} />
+  <Route path="/users" component={SignUpPage}/>
+  <Route path="/user/:userId" component={LoginPage} />
+  <Route path="*" component={SignUpPage} />
+  </Switch>
+</Router>
 )
 
 
