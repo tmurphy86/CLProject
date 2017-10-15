@@ -1,6 +1,6 @@
 import React from 'react';
 import {PostsAPI} from '../api';
-import "./Post-Page.css"
+import "./Post-Page.css";
 import {
   ContentCard,
   ContentCardBody,
@@ -12,7 +12,8 @@ import {
   Search,
   Content,
   UserImage,
-  PostMessageForm
+  PostMessageForm,
+  PostMap
 } from "../components";
 
 
@@ -114,6 +115,10 @@ class PostPage extends React.Component {
             </Col>
             <Col size="md-4" offset="ml-auto">
               <SidebarButton href="/#" postId={this.state.postId}><i className="fa fa-heart-o" aria-hidden="true"></i>Add to Favorites</SidebarButton>
+              <ContentCard>
+                {/* Google Map */}
+                <PostMap lat={this.state.postLat} lng={this.state.postLng} />
+              </ContentCard>
               <div>{this.state.postZip}</div>
               <div>{this.state.postLat}</div>
               <div>{this.state.postLng}</div>

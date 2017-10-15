@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {Header} from "./components";
-import {PostPage} from "./pages";
+import {PostPage, NewPostPage} from "./pages";
 import './App.css';
 
 
@@ -15,6 +15,7 @@ class App extends Component {
             <Route exact path="/" />
             {/* The (\d) is a regular expression that makes sure that the Post route parameter is an integer. */}
             <Route path="/r/region/d/forsale/c/category/post/:postId(\d)" component={PostPage} />
+            <Route path="/newpost" component={NewPostPage} />
           </Switch>
         </div>
       </Router>
