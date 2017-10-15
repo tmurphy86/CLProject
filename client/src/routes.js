@@ -5,55 +5,67 @@ import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 // import App from './Components/app';
 // import NotFoundPage from './Components/pages/not-found-page';
 
-import { RequireAuth, Base} from './Components/Login';
-import { LoginPage, SignUpPage } from './Containers';
+import { Base } from './Components/Login';
+import { LoginPage, SignUpPage, DashboardPage } from './Containers';
+import Auth from './modules/Auth';
 
 
 
 const routes = (
   <Router>
   <Switch>
-  <Route path="/" exact component={SignUpPage} />
-  <Route path="/login" exact component={LoginPage} />
-  <Route path="/users" component={SignUpPage}/>
-  <Route path="/user/:userId" component={LoginPage} />
-  <Route path="*" component={SignUpPage} />
+    <Base>
+      <Route path="/" component={Auth.isUserAuthenticated() ? LoginPage: DashboardPage }/>
+      <Route path="/login" exact component={LoginPage} />
+      <Route path="/users" component={SignUpPage}/>
+      <Route path="/user/:userId" component={LoginPage} />
+      <Route path="*" component={SignUpPage} />
+    </Base>
   </Switch>
 </Router>
 )
 
-
+//
 // const routes = {
-// component: Base,
-//  childRoutes: [
+//   // base component (wrapper for the whole application).
 //
-//    {
-//      path: '/',
-//      component: SignUpPage
-//    },
 //
-//    {
-//      path: '/login',
-//      component: LoginPage
-//    },
+//   component: Base,
+//   childRoutes: [
 //
-//    {
-//      path: '/signup',
-//      component: SignUpPage
-//    }
+//     {
+//       path: '/',
+//       getComponent: (location, callback) => {
+//         if (Auth.isUserAuthenticated()) {
+//           callback(null, DashboardPage);
+//         } else {
+//           callback(null, LoginPage);
+//         }
+//       }
+//     },
 //
-//  ]
+//     {
+//       path: '/login',
+//       component: LoginPage
+//     },
+//
+//     {
+//       path: '/signup',
+//       component: SignUpPage
+//     },
+//
+//     {
+//       path: '/logout',
+//       onEnter: (nextState, replace) => {
+//         Auth.deauthenticateUser();
+//
+//         // change the current URL to /
+//         replace('/');
+//       }
+//     }
+//
+//   ]
+//
 // };
-//   <Route path="/" component={LoginForm} />
-//
-// );
 
-export default routes
-
-{/* <IndexRoute component={HomePage} />
-<Route path="register" component={Register} />
-<Route path="login" component={Login} />
-<Route path="dashboard" component={Dashboard} /> */}
-
-{/* <Route path="*" component={NotFoundPage} /> */}
-{/* </Route> */}
+export default routes;

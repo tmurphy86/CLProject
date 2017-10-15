@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Auth from '../../modules/Auth';
 
 
@@ -8,12 +8,12 @@ const Base = ({ children }) => (
   <div>
     <div className="top-bar">
       <div className="top-bar-left">
-        <NavLink to="/">React App</NavLink>
+        <NavLink to="/">CraigsList2.0</NavLink>
       </div>
 
       <div className="top-bar-right">
-        <Link to="/login">Log in</Link>
-        <Link to="/signup">Sign up</Link>
+        <NavLink to="/login">Log in</NavLink>
+        <NavLink to="/signup">Sign up</NavLink>
       </div>
 
     </div>
