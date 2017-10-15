@@ -19,7 +19,7 @@ class HeaderNavigation extends React.Component {
           <a href="/#">Register</a>
         </li>
         <li>
-          <PrimaryButton href="/">post an ad</PrimaryButton>
+          <PrimaryButton href="/newpost">post an ad</PrimaryButton>
         </li>
       </ul>
     )

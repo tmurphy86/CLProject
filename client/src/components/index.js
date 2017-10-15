@@ -24,3 +24,6 @@ export {default as Content} from './Content/Content.js';
 
 //Images
 export {default as UserImage} from './Images/UserImage.js';
+
+// Map
+export {default as PostMap} from './GoogleMaps/GoogleMaps.js';

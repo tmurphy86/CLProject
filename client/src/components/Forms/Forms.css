@@ -1,4 +1,4 @@
-.post-message-form input{
+.post-message-form textarea{
   border:none;
   border-bottom:1px solid #d2dde2;
   outline: none;
@@ -6,21 +6,22 @@
   line-height: 45px;
   width:100%;
   padding-left: 10px;
+  resize: none;
 }
 
-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+.post-message-form textarea::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #b4c3c8;
   font-size:1.2rem;
 }
-input::-moz-placeholder { /* Firefox 19+ */
+.post-message-form textarea::-moz-placeholder { /* Firefox 19+ */
   color: #b4c3c8;
   font-size:1.2rem;
 }
-input:-ms-input-placeholder { /* IE 10+ */
+.post-message-form textarea:-ms-input-placeholder { /* IE 10+ */
   color: #b4c3c8;
   font-size:1.2rem;
 }
-input:-moz-placeholder { /* Firefox 18- */
+.post-message-form textarea:-moz-placeholder { /* Firefox 18- */
   color: #b4c3c8;
   font-size:1.2rem;
 }

@@ -33,6 +33,7 @@ a.SidebarButton{
   color:#fff;
   padding: 15px 30px;
   font-weight:800;
+  margin-bottom: 45px;
 }
 
 a.SidebarButton:hover{
