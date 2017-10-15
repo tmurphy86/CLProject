@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LoginForm from '../Components/Login/LoginForm';
+import Auth from '../modules/Auth';
 import './index.css';
 
 
@@ -9,12 +10,21 @@ class LoginPage extends React.Component {
   /**
    * Class constructor.
    */
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
+
+    const storedMessage = localStorage.getItem('successMessage');
+    let successMessage = '';
+
+    if (storedMessage) {
+      successMessage = storedMessage;
+      localStorage.removeItem('successMessage');
+    }
 
     // set the initial component state
     this.state = {
       errors: {},
+      successMessage,
       user: {
         email: '',
         password: ''
@@ -34,8 +44,45 @@ class LoginPage extends React.Component {
     // prevent default action. in this case, action is the form submission event
     event.preventDefault();
 
-    console.log('email:', this.state.user.email);
-    console.log('password:', this.state.user.password);
+    // create a string for an HTTP body message
+    const email = encodeURIComponent(this.state.user.email);
+    const password = encodeURIComponent(this.state.user.password);
+    const formData = `email=${email}&password=${password}`;
+
+    // create an AJAX request
+    const xhr = new XMLHttpRequest();
+    xhr.open('post', '/auth/login');
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', () => {
+      if (xhr.status === 200) {
+        // success
+
+        // change the component-container state
+        this.setState({
+          errors: {}
+        });
+
+        // save the token
+        Auth.authenticateUser(xhr.response.token);
+
+
+        // change the current URL to /
+        this.context.router.history.push('/dashboard');
+      } else {
+        // failure
+
+        // change the component state
+        const errors = xhr.response.errors ? xhr.response.errors : {};
+        errors.summary = xhr.response.message;
+
+        this.setState({
+          errors
+        });
+      }
+    });
+    console.log(formData)
+    xhr.send(formData);
   }
 
   /**
@@ -62,11 +109,16 @@ class LoginPage extends React.Component {
         onSubmit={this.processForm}
         onChange={this.changeUser}
         errors={this.state.errors}
+        successMessage={this.state.successMessage}
         user={this.state.user}
       />
     );
   }
 
 }
+
+LoginPage.contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 export default LoginPage;

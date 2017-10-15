@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+
 import {Header, Search} from "./Components";
 import { LoginPage, SignUpPage } from './Containers';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -22,7 +22,7 @@ class App extends Component {
         {/* <Search /> */}
         {/* <LoginPage /> */}
           {routes}
-        
+
 
       </div>
       </MuiThemeProvider>

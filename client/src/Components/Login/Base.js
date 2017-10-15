@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, NavLink } from 'react-router-dom';
+import Auth from '../../modules/Auth';
 
 
 const Base = ({ children }) => (

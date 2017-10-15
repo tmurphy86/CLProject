@@ -14,7 +14,7 @@ const routes = (
   <Router>
   <Switch>
   <Route path="/" exact component={SignUpPage} />
-  <Route path="/login" component={LoginPage} />
+  <Route path="/login" exact component={LoginPage} />
   <Route path="/users" component={SignUpPage}/>
   <Route path="/user/:userId" component={LoginPage} />
   <Route path="*" component={SignUpPage} />
