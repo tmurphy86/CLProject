@@ -107,7 +107,7 @@ class PostPage extends React.Component {
                     <Col size="md-2">
                       <UserImage src="https://avatars1.githubusercontent.com/u/8130090" alt="users image" />
                     </Col>
-                    <Col size="md-10" >
+                    <Col size="md-10">
                       <PostMessageForm />
                     </Col>
                   </Row>
