@@ -34,7 +34,8 @@ class PostPage extends React.Component {
       postPhone:"",
       postObo:false,
       postLat:"",
-      postLng:""
+      postLng:"",
+      postAddressString:""
     }
   };
 
@@ -60,7 +61,8 @@ class PostPage extends React.Component {
         postPhone:res.data.phone,
         postObo:false,
         postLat:res.data.lat,
-        postLng:res.data.lng
+        postLng:res.data.lng,
+        postAddressString:res.data.addressString
       })
 
       console.log(this.state.postId)
@@ -119,14 +121,21 @@ class PostPage extends React.Component {
                 {/* Google Map */}
                 <PostMap lat={this.state.postLat} lng={this.state.postLng} />
               </ContentCard>
-              <div>{this.state.postZip}</div>
-              <div>{this.state.postLat}</div>
-              <div>{this.state.postLng}</div>
-              <div>{this.state.postLocation}</div>
-              <div>
+              <div style={{position:'relative', float:'left'}}>
+                <Row>
+                  <Col size="md-3"><strong>Location:</strong></Col>
+                  <Col size="md-8" offset="ml-auto">{this.state.postAddressString}</Col>
+                </Row>
+              <br/>
                 {(() => {
-                  if(this.state.postAddress){
-                    return this.state.postAddress
+                  if(this.state.postPhone){
+                    return (
+                      <Row>
+                        <Col size="md-3"><strong>Phone:</strong></Col>
+                        <Col size="md-8" offset="ml-auto">{this.state.postPhone}</Col>
+                      </Row>
+
+                    )
                   }
                 })()}
               </div>

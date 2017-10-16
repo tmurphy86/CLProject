@@ -50,13 +50,14 @@ router.get("/:id", (req, res)=>{
         geoLocation += " " + postData.location;
       }
       if (postData.phone){
-        postObject.phone = postData.phone;
+        postObject.phone = formatPhoneNumber(postData.phone);
       }
       if (postData.obo){
         postObject.obo = postData.obo;
       }
 
       geoLocation += " " + postObject.zip;
+      postObject.addressString = geoLocation;
 
 
       // Geocode an address.
@@ -66,8 +67,6 @@ router.get("/:id", (req, res)=>{
         if (!err) {
           postObject.lat = response.json.results[0].geometry.location.lat;
           postObject.lng = response.json.results[0].geometry.location.lng;
-
-          console.log(geoLocation , "\n", postObject)
 
           res.json(postObject)
 
@@ -114,4 +113,11 @@ function grabPostData(id, callback){
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+
+function formatPhoneNumber(s) {
+  var s2 = (""+s).replace(/\D/g, '');
+  var m = s2.match(/^(\d{3})(\d{3})(\d{4})$/);
+  return (!m) ? null : "(" + m[1] + ") " + m[2] + "-" + m[3];
 }
