@@ -6,6 +6,7 @@
   width:100%;
   padding: 15px 10px;
   resize: none;
+  margin-bottom: 15px;
 }
 
 .post-message-form textarea::-webkit-input-placeholder { /* Chrome/Opera/Safari */
