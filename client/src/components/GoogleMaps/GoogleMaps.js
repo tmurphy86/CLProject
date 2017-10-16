@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from "react"
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
@@ -5,7 +6,7 @@ import MapStyle from "./MapStyle.json";
 
 const MyMapComponent = compose(
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo&disableDefaultUI=true",
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo",
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `250px` }} />,
     mapElement: <div style={{ height: `100%` }} />,
@@ -15,14 +16,14 @@ const MyMapComponent = compose(
 )((props) =>
 <GoogleMap
   defaultZoom={15}
-  center={{lat: props.lat, lng: props.lng}}
+  center={new google.maps.LatLng(props.lat, props.lng)}
   heading={0}
   clickableIcons={false}
   mapTypeId={"roadmap"}
   defaultOptions={{ styles: MapStyle, disableDefaultUI: true }}
   >
 
-    {<Marker position={{lat: props.lat, lng: props.lng}} defaultIcon="/imgs/mapmarker.png" />}
+    {<Marker position={new google.maps.LatLng(props.lat, props.lng)} defaultIcon="/imgs/mapmarker.png" />}
 
   </GoogleMap>
 )
