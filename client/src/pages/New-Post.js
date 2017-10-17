@@ -1,4 +1,5 @@
 import React from "react";
+import {NewPostForm, Content} from "../components";
 
 
 class NewPost extends React.Component {
@@ -12,7 +13,11 @@ class NewPost extends React.Component {
 
   render(){
     return (
-      <h1>New Post</h1>
+
+      <Content>
+        <NewPostForm />
+      </Content>
+
     )
   }
 }

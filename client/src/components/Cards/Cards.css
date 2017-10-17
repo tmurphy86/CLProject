@@ -1,12 +1,13 @@
 .ContentCard{
   position: relative;
   float: left;
-  width: 100%;  
+  width: 100%;
   background: #fff;
   border-radius: 5px;
-  -moz-box-shadow:     0px 0px 40px 0px #bfcbce;
-  -webkit-box-shadow:  0px 0px 40px 0px #bfcbce;
-  box-shadow:         0px 0px 40px 0px #bfcbce;
+  border: 1px solid #d2dde2;
+  -moz-box-shadow:     0px 10px 10px 0px #d8e4e6;
+  -webkit-box-shadow:  0px 10px 10px 0px #d8e4e6;
+  box-shadow:         0px 10px 10px 0px #d8e4e6;
   margin-bottom:45px;
   color: #557281;
   overflow: hidden;
