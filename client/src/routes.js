@@ -12,17 +12,14 @@ import Auth from './modules/Auth';
 
 
 const routes = (
-  <Router>
   <Switch>
-    <Base>
-      <Route path="/" component={Auth.isUserAuthenticated() ? LoginPage: DashboardPage }/>
+      <Route path="/" exact component={Auth.isUserAuthenticated() ? DashboardPage: LoginPage }/>
       <Route path="/login" exact component={LoginPage} />
-      <Route path="/users" component={SignUpPage}/>
-      <Route path="/user/:userId" component={LoginPage} />
+      <Route path="/users" exact component={SignUpPage}/>
+      <Route path="/user/:userId" exact component={LoginPage} />
       <Route path="*" component={SignUpPage} />
-    </Base>
   </Switch>
-</Router>
+
 )
 
 //

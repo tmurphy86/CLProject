@@ -19,10 +19,12 @@ module.exports = new PassportLocalStrategy({
  };
 
  const newUser = new db.user(userData);
- newUser.save((err) => {
-   if (err) { return done(err); }
+ newUser.save().then((user) => {
+  //  console.log("in save of user passport model" + err)
+  //  if (err) { return done(err); }
+   //
 
-   return done(null);
+   return done(user);
  });
 });
   // db.user.find({ where: { email: email }}).success(function(user) {

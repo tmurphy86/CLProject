@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/Users')
+const db = require('../models');
 const PassportLocalStrategy = require('passport-local').Strategy;
 
 
@@ -19,7 +19,7 @@ module.exports = new PassportLocalStrategy({
   };
 
   // find a user by email address
-  return User.findOne({ email: userData.email }, (err, user) => {
+  return db.user.findOne({ email: userData.email }, (err, user) => {
     if (err) { return done(err); }
 
     if (!user) {

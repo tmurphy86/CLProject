@@ -60,7 +60,6 @@ module.exports = function(sequelize, DataTypes) {
       var hash = pwd.hashSync(userPassword);
       var result = pwd.verifySync(userPassword, hash);
       user.password=hash;
-
     });
 
   return User;

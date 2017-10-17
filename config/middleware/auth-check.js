@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../../models/Users');
+const db = require('../../models');
 
 
 /**
@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
     const userId = decoded.sub;
 
     // check if a user exists
-    return User.findById(userId, (userErr, user) => {
+    return db.user.findById(userId, (userErr, user) => {
       if (userErr || !user) {
         return res.status(401).end();
       }

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SignUp from '../Components/Login/SignUp';
+import SignUpForm from '../Components/Login/SignUpForm';
 import './index.css';
 
 
@@ -46,7 +46,9 @@ class SignUpPage extends React.Component {
     xhr.open('post', '/auth/signup');
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
-    xhr.addEventListener('load', () => {
+    xhr.addEventListener('load', (data) => {
+      // console.log("event listener data " + data)
+      // console.log("confused" + xhr.status)
       if (xhr.status === 200) {
         // success
 
@@ -94,7 +96,7 @@ class SignUpPage extends React.Component {
    */
   render() {
     return (
-      <SignUp
+      <SignUpForm
         onSubmit={this.processForm}
         onChange={this.changeUser}
         errors={this.state.errors}
