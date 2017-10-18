@@ -13,12 +13,7 @@ let PORT = process.env.PORT || 3001;
 
 xps.go(app,
   {
-    staticView: "public", // Also takes an array of strings for multiple view folders.
-    viewEngine: "express-handlebars",
-    bodyParse: ["json", "raw", "urlencoded", "text"], // TRUE or [ARRAY]
-    validator: true,
     cookieParse: true,
-    flash: true,
     httpLogger: "morgan",
   }
 )
@@ -52,9 +47,17 @@ app.use(passport.session());
 // Routes
 // -----------------------------------------------------------------------------
 
-// Register
+// Categories
+let categories = require(path.join(__dirname, "routes/categories-api.js"))
+app.use("/api/categories", categories)
+
+// Render Post
 let post_Page = require(path.join(__dirname, "routes/post-page-api.js"))
-app.use("/region/forsale/category/post/", post_Page)
+app.use("/api", post_Page)
+
+// Submit new Post
+let new_Post = require(path.join(__dirname, "routes/new-post-api.js"))
+app.use("/api/newpost", new_Post)
 
 
 

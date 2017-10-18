@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import {Header, Search} from "./components";
-import {PostPage} from "./pages";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {Header} from "./components";
+import {PostPage, NewPostPage} from "./pages";
 import './App.css';
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Header />
-        <Search />
-        <Router>
+      <Router>
+        <div className="App">
+          <Header />
           <Switch>
             <Route exact path="/" />
-            <Route path="/region/forsale/category/post/:postId" component={PostPage} />
+            {/* The (\d) is a regular expression that makes sure that the Post route parameter is an integer. */}
+            <Route path="/r/region/d/forsale/c/category/post/:postId(\d)" component={PostPage} />
+            <Route path="/newpost" component={NewPostPage} />
           </Switch>
-        </Router>
-      </div>
+        </div>
+      </Router>
     );
   }
 }

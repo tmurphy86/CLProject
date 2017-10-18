@@ -5,6 +5,7 @@ a.clButton{
   border-radius: 6px;
   font-size: .88rem;
   font-weight: 600;
+  color:#fff;
 }
 
 a.PrimaryButton{
@@ -21,4 +22,29 @@ a.PrimaryButton:hover{
   -moz-box-shadow:     0px 5px 40px 0px #b7d1d6;
   -webkit-box-shadow:  0px 5px 40px 0px #b7d1d6;
   box-shadow:         0px 5px 40px 0px #b7d1d6;
+}
+
+a.SidebarButton{
+  position: relative;
+  float: left;
+  text-align:center;
+  background: #33a6e2;
+  width: 100%;
+  color:#fff;
+  padding: 15px 30px;
+  font-weight:800;
+  margin-bottom: 45px;
+}
+
+a.SidebarButton:hover{
+  background: #208ec7;
+  transition: .5s;
+  color:#fff;
+  -moz-box-shadow:     0px 5px 40px 0px #b7d1d6;
+  -webkit-box-shadow:  0px 5px 40px 0px #b7d1d6;
+  box-shadow:         0px 5px 40px 0px #b7d1d6;
+}
+
+a.SidebarButton i{
+  margin-right:15px;
 }
