@@ -1,6 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
-import {PostsAPI} from '../api';
+import {PostsAPI} from '../API';
 import "./Post-Page.css";
 import {
   ContentCard,
@@ -15,11 +14,8 @@ import {
   UserImage,
   PostMessageForm,
   PostMap
-} from "../components";
+} from "../Components";
 
-=======
-import {PostsAPI} from '../API'
->>>>>>> argon2
 
 class PostPage extends React.Component {
   constructor(){

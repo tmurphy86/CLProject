@@ -57,14 +57,12 @@ app.use('/api', authCheckMiddleware);
 // Routes
 // -----------------------------------------------------------------------------
 // routes
-const apiRoutes = require('./routes/api');
 const authRoutes = require('./routes/auth');
+const apiRoutes = require('./routes/api');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 
 // Categories
-let categories = require(path.join(__dirname, "routes/categories-api.js"))
-app.use("/api/categories", categories)
 
 // Render Post
 let post_Page = require(path.join(__dirname, "routes/post-page-api.js"))

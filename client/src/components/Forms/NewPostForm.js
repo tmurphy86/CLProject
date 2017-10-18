@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row, Container } from "../Grid";
 import { ContentCard, ContentCardBody } from "../Cards";
-import {PostsAPI, CategoryAPI} from '../../api';
+import {PostsAPI, CategoryAPI} from '../../API';
 import { Redirect } from 'react-router-dom'
 
 

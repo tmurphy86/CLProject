@@ -18,22 +18,8 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <Router>
-          <Header />
       <div className="App">
-
-          <div className="top-bar">
-            <div className="top-bar-left">
-              <NavLink to="/">CraigsList2.0</NavLink>
-            </div>
-
-            <div className="top-bar-right">
-              <NavLink to="/login">Log in</NavLink>
-              <NavLink to="/signup">Sign up</NavLink>
-            </div>
-
-          </div>
-
-
+        <Header />
           {routes}
 
       </div>

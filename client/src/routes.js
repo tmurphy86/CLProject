@@ -1,13 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-
-
-// import App from './Components/app';
-// import NotFoundPage from './Components/pages/not-found-page';
-
-import { Base } from './Components/Login';
 import { LoginPage, SignUpPage, DashboardPage } from './Containers';
 import Auth from './modules/Auth';
+import {PostPage, NewPostPage} from "./Pages";
 
 
 
@@ -17,10 +12,9 @@ const routes = (
       <Route path="/login" exact component={LoginPage} />
       <Route path="/signup" exact component={SignUpPage}/>
       {/* The (\d) is a regular expression that makes sure that the Post route parameter is an integer. */}
-      <Route path="/r/region/d/forsale/c/category/post/:postId(\d)" component={PostPage} />
-      <Route path="/newpost" component={NewPostPage} />
+      <Route path="/c/category/post/:postId(\d)" component={PostPage} />
+      <Route path="/newpost" exact component={NewPostPage} />
       <Route path="/dashboard" exact component={DashboardPage}/>
-      <Route path="/user/:userId" exact component={LoginPage} />
       <Route path="*" component={LoginPage} />
   </Switch>
 

@@ -6,7 +6,7 @@ const db = require('../../models');
  *  The Auth Checker middleware function.
  */
 module.exports = (req, res, next) => {
-  console.log(req.headers.authorization)
+  console.log("auth route please" + req.headers)
   if (!req.headers.authorization) {
     return res.status(401).end();
   }
@@ -24,6 +24,7 @@ module.exports = (req, res, next) => {
 
     // check if a user exists
     return db.user.findById(userId, (userErr, user) => {
+      console.log("what is this user:" + user)
       if (userErr || !user) {
         return res.status(401).end();
       }

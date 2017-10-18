@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LoginForm from '../Components/Login/LoginForm';
 import Auth from '../modules/Auth';
-import './index.css';
+import { Content } from "../Components";
 
 
 class LoginPage extends React.Component {
@@ -105,6 +105,7 @@ class LoginPage extends React.Component {
    */
   render() {
     return (
+      <Content>
       <LoginForm
         onSubmit={this.processForm}
         onChange={this.changeUser}
@@ -112,6 +113,7 @@ class LoginPage extends React.Component {
         successMessage={this.state.successMessage}
         user={this.state.user}
       />
+    </Content>
     );
   }
 

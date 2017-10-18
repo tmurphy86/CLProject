@@ -1,5 +1,5 @@
 import React from "react";
-import {NewPostForm, Content} from "../components";
+import {NewPostForm, Content} from "../Components";
 
 
 class NewPost extends React.Component {
