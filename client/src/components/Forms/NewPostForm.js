@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Row, Container } from "../Grid";
 import { ContentCard, ContentCardBody } from "../Cards";
 import {PostsAPI, CategoryAPI} from '../../api';
+import { Redirect } from 'react-router-dom'
 
 
 class NewPostForm extends React.Component {
@@ -24,6 +25,9 @@ class NewPostForm extends React.Component {
 
       // Render categories.
       categories:[],
+
+      // Check if submission was successful;
+      fireRedirect: false,
     }
   }
 
@@ -66,7 +70,6 @@ class NewPostForm extends React.Component {
 
     const postObject = this.state;
     delete postObject.categories; // Don't include categories in the POST request.
-    delete postObject.errors; // Don't include errors in the POST request.
 
     PostsAPI.submitPostData(postObject)
     .then( res => {
@@ -79,8 +82,10 @@ class NewPostForm extends React.Component {
           errorMessageNode.append(err.error);
           errorMsgs.append(errorMessageNode)
         })
-      } else {
-        console.log("No Errors")
+      } else if(res.data === "success") {
+        this.setState({
+          fireRedirect: true
+        })
       }
 
     })
@@ -91,6 +96,8 @@ class NewPostForm extends React.Component {
 
 
   render(){
+    const { fireRedirect } = this.state;
+
     return (
       <Container>
 
@@ -215,6 +222,10 @@ class NewPostForm extends React.Component {
             </Col>
           </Row>
         </form>
+
+        {fireRedirect && (
+          <Redirect to={'/'}/>
+        )}
 
       </Container>
     )

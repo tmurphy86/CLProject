@@ -70,6 +70,10 @@ router.post("/", (req,res) =>{
 
     createNewPost(newPost, (data)=>{
 
+      if(data){
+        res.json("success")
+      }
+
     })
 
   }
