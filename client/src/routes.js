@@ -16,6 +16,7 @@ const routes = (
       <Route path="/" exact component={Auth.isUserAuthenticated() ? DashboardPage: LoginPage }/>
       <Route path="/login" exact component={LoginPage} />
       <Route path="/users" exact component={SignUpPage}/>
+      <Route path="/dashboard" exact component={DashboardPage}/>
       <Route path="/user/:userId" exact component={LoginPage} />
       <Route path="*" component={SignUpPage} />
   </Switch>

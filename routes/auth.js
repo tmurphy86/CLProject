@@ -116,21 +116,6 @@ router.post('/signup', (req, res, next) => {
    })(req, res, next);
  });
 
-//   return passport.authenticate('local-signup',{ failureRedirect: '/signup' }),
-//     function(req, res) {
-//       // if (err) {
-//       //   return res.status(400).json({
-//       //   success: false,
-//       //   message: 'Could not process the form.'
-//       //   });
-//       // }
-//       console.log(res.body);
-//         return res.status(200).json({
-//             success: true,
-//             message: 'You have successfully signed up! Now you should be able to log in.'
-//         });
-//     }(req, res, next);
-// });
 
 router.post('/login', (req, res, next) => {
   console.log(req.body)

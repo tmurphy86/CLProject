@@ -1,6 +1,7 @@
 import React from 'react';
 import Auth from '../modules/Auth';
 import Dashboard from '../Components/Login/Dashboard';
+import './index.css';
 
 
 class DashboardPage extends React.Component {
@@ -28,6 +29,7 @@ class DashboardPage extends React.Component {
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
+        console.log('component mounts with auth')
         this.setState({
           secretData: xhr.response.message
         });
