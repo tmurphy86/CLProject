@@ -38,7 +38,6 @@ module.exports = function(sequelize, DataTypes) {
         },
         notifications: {
             type: DataTypes.BOOLEAN,
-            allowNull: false,
             DEFAULT: true
         },
         archive: {

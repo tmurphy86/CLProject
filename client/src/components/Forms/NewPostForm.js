@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row, Container } from "../Grid";
 import { ContentCard, ContentCardBody } from "../Cards";
-import {PostsAPI} from '../../api';
+import {PostsAPI, CategoryAPI} from '../../api';
 
 
 class NewPostForm extends React.Component {
@@ -9,6 +9,8 @@ class NewPostForm extends React.Component {
     super()
 
     this.state = {
+
+      // Form values
       postTitle:"",
       postBody:"",
       postCategory:"",
@@ -18,8 +20,31 @@ class NewPostForm extends React.Component {
       postPhone:"",
       postStreetAddress:"",
       postCity:"",
-      postState:""
+      postState:"",
+
+      // Render categories.
+      categories:[],
     }
+  }
+
+
+
+  componentWillMount(){
+    // Populate Categories Field from Database
+    this.grabCategories()
+  }
+
+  grabCategories = () =>{
+
+    CategoryAPI.grabCategories()
+    .then( res => {
+
+      this.setState({
+        categories: res.data
+      })
+
+    })
+    .catch(err => console.log(err));
   }
 
   handleInputChange = (e) => {
@@ -29,40 +54,41 @@ class NewPostForm extends React.Component {
   }
 
   handleCheckbox = (e) => {
-
     this.setState({
       [e.target.name]:!this.state[e.target.name]
     })
-
   }
 
   submitForm = (e) => {
     e.preventDefault();
+    const errorMsgs = document.getElementById("errorMsgs");
+    errorMsgs.innerHTML="";
 
-      const postObject = {
-        postTitle:this.state.postTitle,
-        postBody:this.state.postBody,
-        postCategory:this.state.postCategory,
-        postPrice:this.state.postPrice,
-        postObo:false,
-        postZip:this.state.postZip,
-        postPhone:this.state.postPhone,
-        postStreetAddress:this.state.postStreetAddress,
-        postCity:this.state.postCity,
-        postState:this.state.postState
+    const postObject = this.state;
+    delete postObject.categories; // Don't include categories in the POST request.
+    delete postObject.errors; // Don't include errors in the POST request.
+
+    PostsAPI.submitPostData(postObject)
+    .then( res => {
+
+      if (res.data.errors){
+        this.grabCategories()
+        errorMsgs.style.display="block"
+        res.data.errors.map(err => {
+          const errorMessageNode = document.createElement("li");
+          errorMessageNode.append(err.error);
+          errorMsgs.append(errorMessageNode)
+        })
+      } else {
+        console.log("No Errors")
       }
 
-
-        PostsAPI.submitPostData(postObject)
-        .then( res => {
-
-          console.log(res)
-
-        })
-        .catch(err => console.log(err));
-
+    })
+    .catch(err => console.log(err));
 
   }
+
+
 
   render(){
     return (
@@ -71,6 +97,8 @@ class NewPostForm extends React.Component {
         <h2>Create New Post</h2>
         <br/>
         <br/>
+
+        <div className="alert alert-danger" id="errorMsgs" style={{display:"none"}} role="alert"></div>
 
         <form id="newPostForm">
           <Row>
@@ -140,11 +168,16 @@ class NewPostForm extends React.Component {
                 <ContentCardBody>
                   <div className="form-group">
                     <label htmlFor="inputCategory" className="form-label">Category</label>
-                    <select id="inputState" className="form-control" name="postCategory" onChange={this.handleInputChange} required>
+                    <select id="category" className="form-control" name="postCategory" onChange={this.handleInputChange} value={this.state.category} required>
                       <option defaultValue></option>
-                      <option value="One">One</option>
-                      <option value="Two">Two</option>
-                      <option value="Three">Three</option>
+                      {(() => {
+                        if(this.state.categories){
+                          return (
+                            this.state.categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)
+                          )
+                        }
+                      })()}
+
                     </select>
                   </div>
                   <div className="form-group">

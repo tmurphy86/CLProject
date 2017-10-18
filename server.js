@@ -13,7 +13,6 @@ let PORT = process.env.PORT || 3001;
 
 xps.go(app,
   {
-    validator: true,
     cookieParse: true,
     httpLogger: "morgan",
   }
@@ -48,6 +47,10 @@ app.use(passport.session());
 // Routes
 // -----------------------------------------------------------------------------
 
+// Categories
+let categories = require(path.join(__dirname, "routes/categories-api.js"))
+app.use("/api/categories", categories)
+
 // Render Post
 let post_Page = require(path.join(__dirname, "routes/post-page-api.js"))
 app.use("/api", post_Page)
@@ -55,6 +58,7 @@ app.use("/api", post_Page)
 // Submit new Post
 let new_Post = require(path.join(__dirname, "routes/new-post-api.js"))
 app.use("/api/newpost", new_Post)
+
 
 
 // Display 404 for unrecognized Routes

@@ -12,7 +12,7 @@ router.get("/:id", (req, res)=>{
 
   const postId = parseInt(req.params.id);
 
-  console.log("-------------------------------------", postId)
+  console.log("----------post-page-api-------------", postId)
 
   grabPostData(postId, (postData)=>{
 
