@@ -4,7 +4,6 @@ const xps = require("./xps.js")
 const bodyParser = require('body-parser');
 const session = require('express-session')
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 
 
 const app = xps.app();
@@ -43,9 +42,25 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// load passport strategies
+const localSignupStrategy = require('./config/local-signup');
+const localLoginStrategy = require('./config/local-login');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
+
+
+// pass the authenticaion checker middleware
+const authCheckMiddleware = require('./config/middleware/auth-check');
+app.use('/api', authCheckMiddleware);
+
 
 // Routes
 // -----------------------------------------------------------------------------
+// routes
+const apiRoutes = require('./routes/api');
+const authRoutes = require('./routes/auth');
+app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
 
 // Categories
 let categories = require(path.join(__dirname, "routes/categories-api.js"))

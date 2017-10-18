@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import {PostsAPI} from '../api';
 import "./Post-Page.css";
 import {
@@ -16,6 +17,9 @@ import {
   PostMap
 } from "../components";
 
+=======
+import {PostsAPI} from '../API'
+>>>>>>> argon2
 
 class PostPage extends React.Component {
   constructor(){
