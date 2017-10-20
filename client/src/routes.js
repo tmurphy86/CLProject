@@ -15,52 +15,14 @@ const routes = (
       <Route path="/c/category/post/:postId(\d)" component={PostPage} />
       <Route path="/newpost" exact component={NewPostPage} />
       <Route path="/dashboard" exact component={DashboardPage}/>
+      {/* <Route path="/logout" exact component={`onEnter: (nextState, replace) => {
+              Auth.deauthenticateUser();
+              replace('/');
+            }`}/> */}
       <Route path="*" component={LoginPage} />
   </Switch>
 
 )
 
-//
-// const routes = {
-//   // base component (wrapper for the whole application).
-//
-//
-//   component: Base,
-//   childRoutes: [
-//
-//     {
-//       path: '/',
-//       getComponent: (location, callback) => {
-//         if (Auth.isUserAuthenticated()) {
-//           callback(null, DashboardPage);
-//         } else {
-//           callback(null, LoginPage);
-//         }
-//       }
-//     },
-//
-//     {
-//       path: '/login',
-//       component: LoginPage
-//     },
-//
-//     {
-//       path: '/signup',
-//       component: SignUpPage
-//     },
-//
-//     {
-//       path: '/logout',
-//       onEnter: (nextState, replace) => {
-//         Auth.deauthenticateUser();
-//
-//         // change the current URL to /
-//         replace('/');
-//       }
-//     }
-//
-//   ]
-//
-// };
 
 export default routes;

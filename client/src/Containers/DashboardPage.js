@@ -2,10 +2,11 @@ import React from 'react';
 import Auth from '../modules/Auth';
 import Dashboard from '../Components/Login/Dashboard';
 import { Content } from "../Components";
+// import AuthWrapper from "./AuthWrapper";
 
 
 class DashboardPage extends React.Component {
-
+  //
   /**
    * Class constructor.
    */
@@ -29,7 +30,6 @@ class DashboardPage extends React.Component {
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
-        console.log('component mounts with auth')
         this.setState({
           secretData: xhr.response.message
         });
@@ -37,16 +37,15 @@ class DashboardPage extends React.Component {
     });
     xhr.send();
   }
-
-  /**
-   * Render the component.
-   */
+  //
+  // /**
+  //  * Render the component.
+  //  */
   render() {
     return (
       <Content>
       <Dashboard secretData={this.state.secretData} />
-    </Content>
-
+      </Content>
     );
   }
 

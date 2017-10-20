@@ -1,6 +1,8 @@
 import React from 'react';
-import {PostsAPI} from '../API';
+import axios from "axios";
+import {setAuthToken} from '../API';
 import "./Post-Page.css";
+import Auth from '../modules/Auth';
 import {
   ContentCard,
   ContentCardBody,
@@ -39,12 +41,13 @@ class PostPage extends React.Component {
     }
   };
 
+
   componentWillMount(){
 
     const postId = this.props.match.params.postId;
 
-    PostsAPI.grabPostData(postId)
-    .then( res => {
+    setAuthToken(Auth.getToken());
+    axios.get(`/api/${postId}`).then( res => {
 
       console.log(this.state.postId)
 

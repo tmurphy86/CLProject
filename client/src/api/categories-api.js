@@ -4,7 +4,6 @@ import axios from "axios";
 export default{
 
   grabCategories: () => {
-    
     return axios.get(`/api/categories`);
 
   },

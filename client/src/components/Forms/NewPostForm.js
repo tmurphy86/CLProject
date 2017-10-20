@@ -1,8 +1,11 @@
 import React from "react";
 import { Col, Row, Container } from "../Grid";
 import { ContentCard, ContentCardBody } from "../Cards";
-import {PostsAPI, CategoryAPI} from '../../API';
-import { Redirect } from 'react-router-dom'
+import {setAuthToken} from '../../API';
+import { Redirect } from 'react-router-dom';
+import Auth from '../../modules/Auth';
+import qs from "qs";
+import axios from "axios";
 
 
 class NewPostForm extends React.Component {
@@ -32,17 +35,11 @@ class NewPostForm extends React.Component {
   }
 
 
-
-  componentWillMount(){
+componentWillMount(){
     // Populate Categories Field from Database
-    this.grabCategories()
-  }
-
-  grabCategories = () =>{
-
-    CategoryAPI.grabCategories()
-    .then( res => {
-
+    setAuthToken(Auth.getToken());
+    axios.get(`/api/categories`).then( res => {
+      console.log(res)
       this.setState({
         categories: res.data
       })
@@ -71,11 +68,10 @@ class NewPostForm extends React.Component {
     const postObject = this.state;
     delete postObject.categories; // Don't include categories in the POST request.
 
-    PostsAPI.submitPostData(postObject)
-    .then( res => {
+    axios.post('/api/newpost', qs.stringify(postObject)).then( res => {
 
       if (res.data.errors){
-        this.grabCategories()
+        // this.grabCategories()
         errorMsgs.style.display="block"
         res.data.errors.map(err => {
           const errorMessageNode = document.createElement("li");

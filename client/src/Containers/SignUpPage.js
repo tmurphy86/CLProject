@@ -46,8 +46,6 @@ class SignUpPage extends React.Component {
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
     xhr.addEventListener('load', (data) => {
-      // console.log("event listener data " + data)
-      // console.log("confused" + xhr.status)
       if (xhr.status === 200) {
         // success
 

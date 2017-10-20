@@ -31,11 +31,11 @@ app.use(bodyParser.text({ type: 'text/html' }))
 
 // Handle Sessions
 // -----------------------------------------------------------------------------
-app.use(session({
-  secret:'secret',
-  saveUninitialized: true,
-  resave: true
-}));
+// app.use(session({
+//   secret:'secret',
+//   saveUninitialized: true,
+//   resave: true
+// }));
 
 // Passport
 // -----------------------------------------------------------------------------
@@ -63,14 +63,18 @@ app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 
 // Categories
-
-// Render Post
-let post_Page = require(path.join(__dirname, "routes/post-page-api.js"))
-app.use("/api", post_Page)
+const cat_Page = require(path.join(__dirname, "routes/categories-api.js"))
+app.use("/api/categories", cat_Page)
 
 // Submit new Post
-let new_Post = require(path.join(__dirname, "routes/new-post-api.js"))
+const new_Post = require(path.join(__dirname, "routes/new-post-api.js"))
 app.use("/api/newpost", new_Post)
+
+// Render Post
+const post_Page = require(path.join(__dirname, "routes/post-page-api.js"))
+app.use("/api", post_Page)
+//
+
 
 
 

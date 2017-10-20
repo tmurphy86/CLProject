@@ -9,7 +9,7 @@ let db = require("../models")
 let router = express.Router()
 
 router.get("/:id", (req, res)=>{
-
+  console.log(req.params)
   const postId = parseInt(req.params.id);
 
   console.log("----------post-page-api-------------", postId)

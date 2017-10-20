@@ -24,7 +24,7 @@ router.get("/", (req,res) =>{
       catArray.push(cat)
     })
 
-      res.json(catArray)
+      res.status(200).json(catArray)
 
     } else {
       /// NO DATA FOUND OR RETURNED

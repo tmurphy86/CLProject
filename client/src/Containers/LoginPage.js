@@ -64,7 +64,7 @@ class LoginPage extends React.Component {
         });
 
         // save the token
-        Auth.authenticateUser(xhr.response.token);
+        Auth.authenticateUser(xhr.response.token, xhr.response.user.name);
 
 
         // change the current URL to /
@@ -81,7 +81,6 @@ class LoginPage extends React.Component {
         });
       }
     });
-    console.log(formData)
     xhr.send(formData);
   }
 
