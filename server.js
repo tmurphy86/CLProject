@@ -89,7 +89,7 @@ app.use("/api/messages", messages)
 
 // Display 404 for unrecognized Routes
 app.get('*', function(req, res){
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  res.sendFile(path.join(__dirname+'/client/public/index.html'));
   console.log(req.cookies.cookieId)
 });
 
