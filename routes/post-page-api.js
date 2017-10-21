@@ -1,4 +1,5 @@
 const express = require('express')
+const moment = require('moment')
 const googleMapsClient = require('@google/maps').createClient({
   key: process.env.GOOGLE_API
 });
@@ -36,7 +37,7 @@ router.get("/:id", (req, res)=>{
       postObject.postbody = postData.postbody;
       postObject.price = "$"+numberWithCommas(postData.price);
       postObject.userId = postData.userId;
-      postObject.createdAt = postData.createdAt;
+      postObject.createdAt = moment(postData.createdAt).startOf('minute').fromNow();
 
       let geoLocation = ""
 
@@ -68,7 +69,19 @@ router.get("/:id", (req, res)=>{
           postObject.lat = response.json.results[0].geometry.location.lat;
           postObject.lng = response.json.results[0].geometry.location.lng;
 
-          res.json(postObject)
+          grabAuthorsData(postData.userId, (userData)=>{
+
+            if(userData){
+              postObject.authorName = userData.name;
+              postObject.authorInitial = userData.name.charAt(0).toUpperCase();
+              postObject.authorColor = userData.color;
+
+              res.json(postObject)
+            }
+
+          })
+
+
 
         }
       });
@@ -103,6 +116,24 @@ function grabPostData(id, callback){
 
     if (post != null){
       callback(post)
+    } else {
+      callback(false)
+    }
+
+  });
+
+}
+
+function grabAuthorsData(id, callback){
+
+  db.user.findOne({
+    where:{
+      id: id
+    }
+  }).then(function(user){
+
+    if (user != null){
+      callback(user)
     } else {
       callback(false)
     }

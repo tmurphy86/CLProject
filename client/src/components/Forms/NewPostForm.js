@@ -1,11 +1,9 @@
 import React from "react";
 import { Col, Row, Container } from "../Grid";
 import { ContentCard, ContentCardBody } from "../Cards";
-import {setAuthToken} from '../../API';
+import {CategoryAPI, PostsAPI} from '../../api';
 import { Redirect } from 'react-router-dom';
-import Auth from '../../modules/Auth';
-import qs from "qs";
-import axios from "axios";
+
 
 
 class NewPostForm extends React.Component {
@@ -25,6 +23,7 @@ class NewPostForm extends React.Component {
       postStreetAddress:"",
       postCity:"",
       postState:"",
+      userId: localStorage.id,
 
       // Render categories.
       categories:[],
@@ -35,18 +34,23 @@ class NewPostForm extends React.Component {
   }
 
 
-componentWillMount(){
-    // Populate Categories Field from Database
-    setAuthToken(Auth.getToken());
-    axios.get(`/api/categories`).then( res => {
-      console.log(res)
-      this.setState({
-        categories: res.data
-      })
+  componentWillMount(){
+      // Populate Categories Field from Database
+      this.grabCategories()
+    }
 
-    })
-    .catch(err => console.log(err));
-  }
+    grabCategories = () =>{
+
+      CategoryAPI.grabCategories()
+      .then( res => {
+
+        this.setState({
+          categories: res.data
+        })
+
+      })
+      .catch(err => console.log(err));
+    }
 
   handleInputChange = (e) => {
     this.setState({
@@ -68,10 +72,11 @@ componentWillMount(){
     const postObject = this.state;
     delete postObject.categories; // Don't include categories in the POST request.
 
-    axios.post('/api/newpost', qs.stringify(postObject)).then( res => {
+    PostsAPI.submitPostData(postObject)
+    .then( res => {
 
       if (res.data.errors){
-        // this.grabCategories()
+        this.grabCategories()
         errorMsgs.style.display="block"
         res.data.errors.map(err => {
           const errorMessageNode = document.createElement("li");
@@ -220,7 +225,7 @@ componentWillMount(){
         </form>
 
         {fireRedirect && (
-          <Redirect to={'/'}/>
+          <Redirect to={'/dashboard'}/>
         )}
 
       </Container>

@@ -1,8 +1,6 @@
 import React from 'react';
-import axios from "axios";
-import {setAuthToken} from '../API';
+import {PostsAPI, FavoritesAPI} from '../api';
 import "./Post-Page.css";
-import Auth from '../modules/Auth';
 import {
   ContentCard,
   ContentCardBody,
@@ -37,17 +35,19 @@ class PostPage extends React.Component {
       postObo:false,
       postLat:"",
       postLng:"",
-      postAddressString:""
+      postAddressString:"",
+      authorInitial:"",
+      authorColor:"",
+      authorName:""
     }
   };
-
 
   componentWillMount(){
 
     const postId = this.props.match.params.postId;
 
-    setAuthToken(Auth.getToken());
-    axios.get(`/api/${postId}`).then( res => {
+    PostsAPI.grabPostData(postId)
+    .then( res => {
 
       console.log(this.state.postId)
 
@@ -65,13 +65,36 @@ class PostPage extends React.Component {
         postObo:false,
         postLat:res.data.lat,
         postLng:res.data.lng,
-        postAddressString:res.data.addressString
+        postAddressString:res.data.addressString,
+        authorInitial:res.data.authorInitial,
+        authorColor:res.data.authorColor,
+        authorName: res.data.authorName
       })
 
       console.log(this.state.postId)
 
     })
     .catch(err => console.log(err));
+
+  }
+
+  handleFav = (e) => {
+
+    FavoritesAPI.createFavorite(this.state.postId)
+    .then(res => {
+
+      if (res.data.warning){
+
+        alert(res.data.warning.msg)
+
+      } else if (res.data.success){
+
+        alert(res.data.success.msg)
+
+      }
+    })
+    .catch(err => console.log(err))
+
 
   }
 
@@ -96,9 +119,9 @@ class PostPage extends React.Component {
             <Col size="md-7">
               <ContentCard>
                 <ContentCardHeader>
-                  <UserImage src="https://avatars1.githubusercontent.com/u/8130090" alt="users image" />
-                  <span className="post-authors-name bold-text">Posters Name</span>
-                  <span className="post-date">2 days ago</span>
+                  <UserImage color={this.state.authorColor} initial={this.state.authorInitial} />
+                  <span className="post-authors-name bold-text">{this.state.authorName}</span>
+                  <span className="post-date">{this.state.postCreatedAt}</span>
                 </ContentCardHeader>
                 <ContentCardBody>
                   {this.state.postBody}
@@ -108,7 +131,7 @@ class PostPage extends React.Component {
                 <ContentCardBody>
                   <Row>
                     <Col size="md-2">
-                      <UserImage src="https://avatars1.githubusercontent.com/u/8130090" alt="users image" />
+                      <UserImage color={localStorage.color} initial={localStorage.name.charAt(0)}/>
                     </Col>
                     <Col size="md-10">
                       <PostMessageForm />
@@ -119,17 +142,19 @@ class PostPage extends React.Component {
               </ContentCard>
             </Col>
             <Col size="md-4" offset="ml-auto">
-              <SidebarButton href="/#" postId={this.state.postId}><i className="fa fa-heart-o" aria-hidden="true"></i>Add to Favorites</SidebarButton>
+              <div  onClick={this.handleFav} >
+                <SidebarButton href="#/" postId={this.state.postId}><i className="fa fa-heart-o" aria-hidden="true"></i>Add to Favorites</SidebarButton>
+              </div>
               <ContentCard>
                 {/* Google Map */}
                 <PostMap lat={this.state.postLat} lng={this.state.postLng} />
               </ContentCard>
-              <div style={{position:'relative', float:'left'}}>
+              <div style={{position:'relative', float:'left', width:'100%'}}>
                 <Row>
                   <Col size="md-3"><strong>Location:</strong></Col>
                   <Col size="md-8" offset="ml-auto">{this.state.postAddressString}</Col>
                 </Row>
-              <br/>
+                <br/>
                 {(() => {
                   if(this.state.postPhone){
                     return (

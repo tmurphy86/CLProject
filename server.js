@@ -29,13 +29,6 @@ app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
 // parse an HTML body into a string
 app.use(bodyParser.text({ type: 'text/html' }))
 
-// Handle Sessions
-// -----------------------------------------------------------------------------
-// app.use(session({
-//   secret:'secret',
-//   saveUninitialized: true,
-//   resave: true
-// }));
 
 // Passport
 // -----------------------------------------------------------------------------
@@ -62,18 +55,33 @@ const apiRoutes = require('./routes/api');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 
+// Routes
+// -----------------------------------------------------------------------------
+
 // Categories
-const cat_Page = require(path.join(__dirname, "routes/categories-api.js"))
-app.use("/api/categories", cat_Page)
+const categories = require(path.join(__dirname, "routes/categories-api.js"))
+app.use("/api/categories", categories)
+
+// Grab Posts from Specifict Category
+const category_posts = require(path.join(__dirname, "routes/category-posts-api.js"))
+app.use("/api/category", category_posts)
+
+// Render Post
+const post_Page = require(path.join(__dirname, "routes/post-page-api.js"))
+app.use("/api", post_Page)
 
 // Submit new Post
 const new_Post = require(path.join(__dirname, "routes/new-post-api.js"))
 app.use("/api/newpost", new_Post)
 
-// Render Post
-const post_Page = require(path.join(__dirname, "routes/post-page-api.js"))
-app.use("/api", post_Page)
-//
+// Manage Favorites
+const favorites = require(path.join(__dirname, "routes/favorites-api.js"))
+app.use("/api/favorites", favorites)
+
+// Search
+const search = require(path.join(__dirname, "routes/search-api.js"))
+app.use("/api/search", search)
+
 
 
 

@@ -53,7 +53,7 @@ router.post("/", (req,res) =>{
       this.categoryId = categoryId;
     }
 
-    const newPost = new Post(p.postTitle, p.postZip, p.postBody, p.postPrice, p.postObo, "1", p.postCategory);
+    const newPost = new Post(p.postTitle, p.postZip, p.postBody, p.postPrice, p.postObo, p.userId , p.postCategory);
 
     if(p.postPhone){newPost.phone = p.postPhone}
 

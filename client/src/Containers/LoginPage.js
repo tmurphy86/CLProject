@@ -64,11 +64,11 @@ class LoginPage extends React.Component {
         });
 
         // save the token
-        Auth.authenticateUser(xhr.response.token, xhr.response.user.name);
+        Auth.authenticateUser(xhr.response.token, xhr.response.user.name, xhr.response.user.id, xhr.response.user.color);
 
 
         // change the current URL to /
-        this.context.router.history.push('/dashboard');
+        this.context.router.history.push('/c');
       } else {
         // failure
 

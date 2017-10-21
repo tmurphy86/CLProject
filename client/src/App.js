@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-// import {Header} from "./components";
-import {PostPage, NewPostPage} from "./Pages";
-import { BrowserRouter as Router, Route, Switch, NavLink} from "react-router-dom";
-import {Header, Search} from "./Components";
-import { Base } from "./Components/Login";
-import { LoginPage, SignUpPage } from './Containers';
+import { BrowserRouter as Router} from "react-router-dom";
+import {Header} from "./Components";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
 import routes from './routes';

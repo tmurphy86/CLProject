@@ -1,16 +1,13 @@
 module.exports = function(sequelize, DataTypes) {
-    var Categories = sequelize.define("categories", {
-        name: {
+    var Favorites = sequelize.define("favorites", {
+        userId: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                len: [1, 45]
-            }
         },
-        photo: {
+        postId: {
           type: DataTypes.STRING,
           allowNull: false,
         }
     });
-return Categories;
+return Favorites;
 };

@@ -3,7 +3,9 @@ import './Images.css';
 
 const UserImage = (props) => {
   return (
-    <img src={props.src} alt={props.alt} className="userImage img-responsive"/>
+    <div className="userImage img-responsive" style={{background:props.color}}>
+      {props.initial}
+    </div>
   )
 }
 

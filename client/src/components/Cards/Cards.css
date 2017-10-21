@@ -1,13 +1,13 @@
-.ContentCard{
+.ContentCard, .PostCard{
   position: relative;
   float: left;
   width: 100%;
   background: #fff;
   border-radius: 5px;
   border: 1px solid #d2dde2;
-  -moz-box-shadow:     0px 10px 10px 0px #d8e4e6;
-  -webkit-box-shadow:  0px 10px 10px 0px #d8e4e6;
-  box-shadow:         0px 10px 10px 0px #d8e4e6;
+  -moz-box-shadow:     0px 10px 25px 0px #d8e4e6;
+  -webkit-box-shadow:  0px 10px 25px 0px #d8e4e6;
+  box-shadow:         0px 10px 25px 0px #d8e4e6;
   margin-bottom:45px;
   color: #557281;
   overflow: hidden;
@@ -26,4 +26,53 @@
 
 .ContentCardBody{
   padding: 30px;
+}
+
+a.CategoryCard{
+  font-weight: 600;
+  font-size:1.1rem;
+  line-height: 75px;
+}
+
+a.CategoryCard:hover{
+  -moz-box-shadow:     0px 10px 10px 0px #a9bcbf;
+  -webkit-box-shadow:  0px 10px 10px 0px #a9bcbf;
+  box-shadow:         0px 10px 10px 0px #a9bcbf;
+}
+
+.padded-element{
+  padding-left:30px;
+}
+
+.img-block{
+  background: #333;
+  height: 100%;
+}
+
+.PostCard{
+  margin-bottom:0px;
+  margin-top:65px;
+  padding:20px;
+}
+
+.PostCard:hover{
+  transition: .5s;
+  -moz-box-shadow:     0px 10px 10px 0px #a9bcbf;
+  -webkit-box-shadow:  0px 10px 10px 0px #a9bcbf;
+  box-shadow:         0px 10px 10px 0px #a9bcbf;
+}
+
+.PostCard-Meta{
+  font-size:1.2rem;
+}
+
+.PostCard-Meta span{
+  opacity:.5;
+}
+
+.favorite-block{
+  font-size: 1.5rem;
+  text-align: center;
+  width: 100%;
+  height:100%;
 }
