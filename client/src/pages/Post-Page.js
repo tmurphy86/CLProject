@@ -1,5 +1,6 @@
 import React from 'react';
-import {PostsAPI, FavoritesAPI} from '../api';
+import {PostsAPI, FavoritesAPI} from '../API';
+import Auth from '../modules/Auth';
 import "./Post-Page.css";
 import {
   ContentCard,
@@ -93,8 +94,12 @@ class PostPage extends React.Component {
 
       }
     })
-    .catch(err => console.log(err))
-
+    .catch(err => {
+      if(err.response.status===401) {
+        window.location= '/login'
+      }
+      console.log(err)
+    });
 
   }
 
@@ -127,6 +132,11 @@ class PostPage extends React.Component {
                   {this.state.postBody}
                 </ContentCardBody>
               </ContentCard>
+              {(() => {
+                if(!Auth.isUserAuthenticated()){
+                  return (<div></div>)
+                } else {
+                  return (
               <ContentCard>
                 <ContentCardBody>
                   <Row>
@@ -140,6 +150,9 @@ class PostPage extends React.Component {
 
                 </ContentCardBody>
               </ContentCard>
+            )
+          }
+        })()}
             </Col>
             <Col size="md-4" offset="ml-auto">
               <div  onClick={this.handleFav} >

@@ -68,7 +68,7 @@ class LoginPage extends React.Component {
 
 
         // change the current URL to /
-        this.context.router.history.push('/c');
+        this.context.router.history.push('/');
       } else {
         // failure
 

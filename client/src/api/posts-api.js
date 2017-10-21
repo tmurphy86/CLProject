@@ -7,7 +7,7 @@ export default{
 
   grabPostData: (postId) => {
     setAuthToken(Auth.getToken());
-    return axios.get(`/api/${postId}`);
+    return axios.get(`/public/api/${postId}`);
 
   },
 
@@ -19,7 +19,7 @@ export default{
 
   grabPosts: (catId) => {
     setAuthToken(Auth.getToken());
-    return axios.get(`/api/category/${catId}`);
+    return axios.get(`/public/api/category/${catId}`);
 
   },
 

@@ -1,7 +1,7 @@
 import React from "react";
 import {Search, Content, PostCard} from "../Components";
 import { Col, Row, Container } from "../Components/Grid";
-import {CategoryAPI, PostsAPI} from '../api';
+import {CategoryAPI, PostsAPI} from '../API';
 import "./CategoryPage.css";
 
 
@@ -23,7 +23,7 @@ class CategoryPage extends React.Component {
 
   grabCategoryData = () => {
     const catId = this.props.match.params.category;
-  
+
     CategoryAPI.grabCategory(catId)
     .then( res => {
       console.log(res.data)

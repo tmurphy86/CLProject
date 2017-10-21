@@ -5,9 +5,9 @@ import {setAuthToken} from './index.js';
 export default{
 
   grabSearchResults: (query) => {
-    
+
     setAuthToken(Auth.getToken());
-    return axios.get(`/api/search/${query}`);
+    return axios.get(`/public/api/search/${query}`);
 
   },
 

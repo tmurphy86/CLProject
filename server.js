@@ -60,15 +60,15 @@ app.use('/api', apiRoutes);
 
 // Categories
 const categories = require(path.join(__dirname, "routes/categories-api.js"))
-app.use("/api/categories", categories)
+app.use("/public/api/categories", categories)
 
 // Grab Posts from Specifict Category
 const category_posts = require(path.join(__dirname, "routes/category-posts-api.js"))
-app.use("/api/category", category_posts)
+app.use("/public/api/category", category_posts)
 
 // Render Post
 const post_Page = require(path.join(__dirname, "routes/post-page-api.js"))
-app.use("/api", post_Page)
+app.use("/public/api", post_Page)
 
 // Submit new Post
 const new_Post = require(path.join(__dirname, "routes/new-post-api.js"))
@@ -80,7 +80,7 @@ app.use("/api/favorites", favorites)
 
 // Search
 const search = require(path.join(__dirname, "routes/search-api.js"))
-app.use("/api/search", search)
+app.use("/public/api/search", search)
 
 
 
@@ -98,7 +98,7 @@ app.get('*', function(req, res){
 let db = require('./models')
 
 
-db.sequelize.sync().then(function(){
+db.sequelize.sync({force:false}).then(function(){
   app.listen(PORT, (err)=>{
     if (err) console.log(err)
     console.log("++ Server started on PORT ", PORT)

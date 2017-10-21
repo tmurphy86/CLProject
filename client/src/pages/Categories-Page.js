@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row, Container } from "../Components/Grid";
 import { Search, Content, CategoryCard } from "../Components";
-import {CategoryAPI} from '../api';
+import {CategoryAPI} from '../API';
 
 
 

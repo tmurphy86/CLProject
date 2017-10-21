@@ -1,7 +1,9 @@
 import React from "react";
 import "./Cards.css";
 import {Row, Col} from "../Grid";
-import {FavoritesAPI} from '../../api';
+import {FavoritesAPI} from '../../API';
+import { withRouter } from 'react-router-dom';
+
 
 const PostCard = (props) => {
 
@@ -22,7 +24,12 @@ const PostCard = (props) => {
 
       }
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      if(err.response.status===401) {
+        window.location= '/login'
+      }
+      console.log(err)
+    });
 
     if(node.classList.contains("fa-heart-o")){
 

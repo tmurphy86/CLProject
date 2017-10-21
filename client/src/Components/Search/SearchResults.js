@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Row } from "../Grid";
 import {PostCard} from "../../Components";
-import {SearchAPI} from '../../api';
+import {SearchAPI} from '../../API';
 
 class SearchResults extends React.Component {
   constructor(props){
