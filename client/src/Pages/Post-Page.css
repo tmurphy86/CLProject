@@ -1,0 +1,33 @@
+.post-title, .post-price{
+  margin-bottom:75px;
+  color: #557281;
+}
+
+.post-price{
+  font-size:3rem;
+}
+
+.post-authors-name{
+  position: relative;
+  float: left;
+  margin-left:15px;
+  line-height: 45px;
+}
+
+.post-date{
+  position: relative;
+  margin-left: 40px;
+  line-height: 45px;
+  opacity: .5;
+}
+
+.post-date::before{
+  content: "";
+  position: absolute;
+  top:50%;
+  left:-25px;
+  width:15px;
+  height: 2px;
+  background: #557281;
+  opacity: .5;
+}

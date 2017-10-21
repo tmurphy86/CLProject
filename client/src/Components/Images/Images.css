@@ -1,0 +1,12 @@
+.userImage{
+  position: relative;
+  float: left;
+  width: 45px;
+  height:45px;
+  border-radius: 45px;
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  font-size:1.3rem;
+  line-height: 45px;
+}

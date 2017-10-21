@@ -1,0 +1,7 @@
+#favAlert.hidden{
+  display: none;
+}
+
+#favAlert.seen{
+  display: block;
+}
