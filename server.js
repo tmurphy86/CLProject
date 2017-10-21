@@ -4,18 +4,19 @@ const xps = require("./xps.js")
 const bodyParser = require('body-parser');
 const session = require('express-session')
 const passport = require('passport');
+const express = require('express');
 
 
-const app = xps.app();
+const app = express();
 
 let PORT = process.env.PORT || 3001;
 
-xps.go(app,
-  {
-    cookieParse: true,
-    httpLogger: "morgan",
-  }
-)
+// xps.go(app,
+//   {
+//     cookieParse: true,
+//     httpLogger: "morgan",
+//   }
+// )
 
 // parse various different custom JSON types as JSON
 app.use(bodyParser.json({ type: 'application/*+json' }))
