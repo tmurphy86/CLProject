@@ -1,18 +1,31 @@
 import React from 'react';
 import "./Forms.css";
+import {MessageAPI} from '../../API';
 
 class PostMessageForm extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
     this.state = {
-      messageVal: ""
+      messageVal: "",
+      senderName: "",
+      senderId: "",
+      receiverName: "",
+      receiverId: "",
+      postTitle: "",
+      postId: "",
     }
   }
 
   handleChange = (e) => {
     this.setState({
-      messageVal: e.target.value
+      messageVal: e.target.value,
+      senderName: this.props.senderName,
+      senderId: this.props.senderId,
+      receiverName: this.props.receiverName,
+      receiverId: this.props.receiverId,
+      postTitle: this.props.postTitle,
+      postId: this.props.postId,
     })
   }
 
@@ -21,7 +34,23 @@ class PostMessageForm extends React.Component {
 
     if(this.state.messageVal){
       // Submit form.
-      console.log(this.state.messageVal)
+
+      MessageAPI.sendMessage(this.state)
+      .then(res => {
+
+        const feedback = document.getElementById("feedback-msg");
+
+        if (res.data.success){
+          feedback.innerHTML = `<span class="text-success">${res.data.success.msg}</span>`
+        }
+        
+        if (res.data.error){
+          feedback.innerHTML = `<span class="text-danger">${res.data.error.msg}</span>`
+        }
+      })
+      .catch(err => console.log(err))
+
+
     } else {
       // Throw error. Don't submit form.
       console.log("empty")
@@ -35,10 +64,11 @@ class PostMessageForm extends React.Component {
 
   render(){
     return (
-        <form className="post-message-form">
-            <textarea rows="3" placeholder="Type your private message" value={this.state.messageVal} onChange={this.handleChange}/>
-            <button className="btn btn-primary btn-md pull-right post-message-form-submit" onClick={this.submitMessage}>SEND</button>
-        </form>
+      <form className="post-message-form">
+        <textarea rows="3" placeholder="Type your private message" value={this.state.messageVal} onChange={this.handleChange}/>
+        <span id="feedback-msg"></span>
+        <button className="btn btn-primary btn-md pull-right post-message-form-submit" onClick={this.submitMessage}>SEND</button>
+      </form>
     )
   }
 }
