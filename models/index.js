@@ -7,12 +7,7 @@ var basename  = path.basename(module.filename);
 var env       = process.env.NODE_ENV || 'development';
 var config    = process.env;
 var db        = {};
-
-if (config.JAWSDB_URL) {
-  var sequelize = new Sequelize(config.JAWSDB_URL);
-} else {
-  var sequelize = new Sequelize(config.DB_DATABASE, config.DB_USERNAME, config.DB_PASSWORD, {host: config.DB_HOST, port: config.DB_PORT, dialect: config.DB_DIALECT});
-}
+var sequelize = new Sequelize(config.JAWSDB_URL);
 
 fs
   .readdirSync(__dirname)
