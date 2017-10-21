@@ -29,6 +29,7 @@ app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
 // parse an HTML body into a string
 app.use(bodyParser.text({ type: 'text/html' }))
 
+app.use(express.static("client/build"));
 
 // Passport
 // -----------------------------------------------------------------------------
@@ -87,11 +88,11 @@ const messages = require(path.join(__dirname, "routes/messages-api.js"))
 app.use("/api/messages", messages)
 
 
-// Display 404 for unrecognized Routes
-app.get('*', function(req, res){
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
-  console.log(req.cookies.cookieId)
-});
+// // Display 404 for unrecognized Routes
+// app.get('*', function(req, res){
+//   res.sendFile(path.join(__dirname+'client/build/index.html'));
+//   console.log(req.cookies.cookieId)
+// });
 
 
 // Database Models
