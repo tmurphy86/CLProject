@@ -27,6 +27,10 @@ class Auth {
    */
   static deauthenticateUser() {
     localStorage.removeItem('token');
+    localStorage.removeItem('name');
+    localStorage.removeItem('id');
+    localStorage.removeItem('color');
+    window.location='/';
   }
 
   /**

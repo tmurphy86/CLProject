@@ -47,15 +47,23 @@ const authCheckMiddleware = require('./config/middleware/auth-check');
 app.use('/api', authCheckMiddleware);
 
 
-// Routes
+// Private Routes
 // -----------------------------------------------------------------------------
-// routes
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 
-// Routes
+// Submit new Post
+const new_Post = require(path.join(__dirname, "routes/new-post-api.js"))
+app.use("/api/newpost", new_Post)
+
+// Manage Favorites
+const favorites = require(path.join(__dirname, "routes/favorites-api.js"))
+app.use("/api/favorites", favorites)
+
+
+//Public Routes
 // -----------------------------------------------------------------------------
 
 // Categories
@@ -70,20 +78,9 @@ app.use("/public/api/category", category_posts)
 const post_Page = require(path.join(__dirname, "routes/post-page-api.js"))
 app.use("/public/api", post_Page)
 
-// Submit new Post
-const new_Post = require(path.join(__dirname, "routes/new-post-api.js"))
-app.use("/api/newpost", new_Post)
-
-// Manage Favorites
-const favorites = require(path.join(__dirname, "routes/favorites-api.js"))
-app.use("/api/favorites", favorites)
-
 // Search
 const search = require(path.join(__dirname, "routes/search-api.js"))
 app.use("/public/api/search", search)
-
-
-
 
 
 // Display 404 for unrecognized Routes
