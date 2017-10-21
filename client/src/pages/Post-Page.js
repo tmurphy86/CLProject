@@ -133,7 +133,7 @@ class PostPage extends React.Component {
                 </ContentCardBody>
               </ContentCard>
               {(() => {
-                if(!Auth.isUserAuthenticated()){
+                if(!Auth.isUserAuthenticated() || parseInt(this.state.postAuthorId) === parseInt(localStorage.id)){
                   return (<div></div>)
                 } else {
                   return (
@@ -144,7 +144,13 @@ class PostPage extends React.Component {
                       <UserImage color={localStorage.color} initial={localStorage.name.charAt(0)}/>
                     </Col>
                     <Col size="md-10">
-                      <PostMessageForm />
+                      <PostMessageForm
+                        senderName={localStorage.name}
+                        senderId={localStorage.id}
+                        receiverName={this.state.authorName}
+                        receiverId={this.state.postAuthorId}
+                        postId={this.state.postId}
+                        postTitle={this.state.postTitle}/>
                     </Col>
                   </Row>
 

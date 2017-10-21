@@ -82,6 +82,10 @@ app.use("/api/favorites", favorites)
 const search = require(path.join(__dirname, "routes/search-api.js"))
 app.use("/public/api/search", search)
 
+// Messages
+const messages = require(path.join(__dirname, "routes/messages-api.js"))
+app.use("/api/messages", messages)
+
 
 
 
