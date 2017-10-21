@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch} from "react-router-dom";
 import { LoginPage, SignUpPage, DashboardPage } from './Containers';
 import Auth from './modules/Auth';
-import {PostPage, NewPostPage, CategoriesPage, CategoryPage, SearchPage} from "./Pages";
+import {PostPage, NewPostPage, CategoriesPage, CategoryPage, SearchPage} from './Pages';
 
 
 
