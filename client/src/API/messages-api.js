@@ -12,4 +12,11 @@ export default{
 
   },
 
+  getUsersMessages: (userId) => {
+
+    setAuthToken(Auth.getToken());
+    return axios.get(`/api/dashboard/messages/${userId}`);
+
+  }
+
 }

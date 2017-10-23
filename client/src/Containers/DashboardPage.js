@@ -1,9 +1,9 @@
 import React from 'react';
 import Auth from '../modules/Auth';
 import Dashboard from '../Components/Login/Dashboard';
-import { Content, Container, Col, Row, ContentCard, ContentCardHeader, ContentCardBody} from "../Components";
+import { Content, Container, Col, Row, ContentCard, ContentCardHeader, ContentCardBody, UserImage} from "../Components";
 import "./Dashboard.css"
-import {FavoritesAPI} from '../API';
+import {FavoritesAPI, MessageAPI} from '../API';
 
 
 class DashboardPage extends React.Component {
@@ -13,12 +13,20 @@ class DashboardPage extends React.Component {
 
     this.state = {
       secretData: '',
-      favorites:[]
+      favorites:[],
+      messages:[]
     };
   }
 
   componentWillMount(){
-    this.getUsersFavorites()
+
+    const userId = localStorage.id;
+
+    if(userId){
+      this.getUsersFavorites(userId);
+      this.getUsersMessages(userId);
+    }
+
   }
 
 
@@ -41,20 +49,28 @@ class DashboardPage extends React.Component {
   }
 
 
-  getUsersFavorites = () => {
+  getUsersFavorites = (userId) => {
 
-    const userId = localStorage.id;
-    console.log(userId)
-    if (userId){
-      FavoritesAPI.getUsersFavorites(userId)
-      .then(res => {
-        this.setState({
-          favorites: res.data
-        })
+    FavoritesAPI.getUsersFavorites(userId)
+    .then(res => {
+      this.setState({
+        favorites: res.data
       })
-      .catch(err => console.log(err))
+    })
+    .catch(err => console.log(err))
 
-    }
+  }
+
+  getUsersMessages = (userId) => {
+
+    MessageAPI.getUsersMessages(userId)
+    .then(res => {
+      console.log(res.data)
+      this.setState({
+        messages: res.data
+      })
+    })
+    .catch(err => console.log(err));
 
   }
 
@@ -69,19 +85,19 @@ class DashboardPage extends React.Component {
     if (userId){
 
       FavoritesAPI.toggleFavorites(postId, userId)
-        .then(res => {
+      .then(res => {
 
-          if(res.data.success){
-            post.remove();
-          }
+        if(res.data.success){
+          post.remove();
+        }
 
-        })
-        .catch(err => {
-          if(err.response.status===401) {
-            window.location= '/login'
-          }
-          console.log(err)
-        });
+      })
+      .catch(err => {
+        if(err.response.status===401) {
+          window.location= '/login'
+        }
+        console.log(err)
+      });
 
     }
 
@@ -90,22 +106,51 @@ class DashboardPage extends React.Component {
   render() {
     return (
       <Content>
-        <Dashboard secretData={this.state.secretData} />
+        {/* <Dashboard secretData={this.state.secretData} /> */}
         <Container>
           <Row>
             <Col size="md-12">
               <h2>Dashboard</h2>
+              <br/>
+              <br/>
             </Col>
             <Col size="md-7">
-              <h2>Dashboard</h2>
+              <ContentCard>
+                <ContentCardHeader>
+                  <i className="fa fa-commenting pull-left" aria-hidden="true"></i>
+                  <div className="bold-text pull-left dashboard-heading">Messages</div>
+                </ContentCardHeader>
+                <ContentCardBody>
+                  <div id="accordion" role="tablist">
+                    {this.state.messages.map((message) => {
+                      return (
+                        <div>
+                          <a data-toggle="collapse" href={"#message-"+message.id} aria-expanded="false" className="message-toggle bold-text">
+                            <li className="message-list list-unstyled" key={message.id} role="tab">
+                              <span className="user-image-span"><UserImage color={localStorage.color} initial={message.senderName.charAt(0)} /></span>
+                              <span className="">{message.senderName}</span>
+                              <span className="pull-right">{message.postTitle}  <span className="msg-date">{message.updatedAt}</span></span>
+                            </li>
+                          </a>
+                          <div id={"message-"+message.id} class="collapse" role="tabpanel" data-parent="#accordion">
+                            <div className="card-body card-body-messages">
+                              {message.messageVal}
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </ContentCardBody>
+              </ContentCard>
             </Col>
             <Col size="md-4" offset="ml-auto">
               <ContentCard>
                 <ContentCardHeader>
                   <i className="fa fa-heart pull-left" aria-hidden="true"></i>
                   <div className="bold-text pull-left dashboard-heading">Favorites</div>
-              </ContentCardHeader>
-              <ContentCardBody>
+                </ContentCardHeader>
+                <ContentCardBody>
                   {this.state.favorites.map((favorite) => {
                     return (
                       <li className="favorite-list list-unstyled" key={favorite.id}>
@@ -114,7 +159,7 @@ class DashboardPage extends React.Component {
                       </li>
                     )
                   })}
-              </ContentCardBody>
+                </ContentCardBody>
               </ContentCard>
             </Col>
           </Row>
