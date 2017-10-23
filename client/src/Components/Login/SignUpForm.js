@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Card, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import './Login.css'
 
 
 const SignUpForm = ({
@@ -52,8 +53,9 @@ const SignUpForm = ({
       <div className="button-line">
         <RaisedButton type="submit" label="Create New Account" primary />
       </div>
-
+      <div className='account-line'>
       <CardText>Already have an account? <Link to={'/login'}>Log in</Link></CardText>
+    </div>
     </form>
   </Card>
 );

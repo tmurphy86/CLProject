@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './Login.css'
 import { Card, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -44,8 +45,9 @@ const LoginForm = ({
       <div className="button-line">
         <RaisedButton type="submit" label="Log in" primary />
       </div>
-
+      <div className='account-line'>
       <CardText>Don't have an account? <NavLink to={'/signup'}>Create one</NavLink>.</CardText>
+    </div>
     </form>
   </Card>
 );
