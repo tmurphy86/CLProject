@@ -2,27 +2,87 @@ import React from "react";
 import "./Cards.css";
 import {Row, Col} from "../Grid";
 import {FavoritesAPI} from '../../API';
-import { withRouter } from 'react-router-dom';
+import Auth from '../../modules/Auth';
 
 
-const PostCard = (props) => {
+class PostCard extends React.Component {
+  constructor(){
+    super();
 
-  const handleFav = (e) => {
+    this.state = {
+      favorite: false
+    }
+  }
+
+  componentWillMount(){
+    this.checkIfFav();
+  }
+
+  checkIfFav = () => {
+
+    if(Auth.isUserAuthenticated){
+
+      const postId = this.props.id;
+      const userId = localStorage.id;
+
+      FavoritesAPI.checkIfFavorite(postId, userId)
+      .then(res =>{
+
+        if(res.data){
+          this.setState({
+            favorite: true
+          })
+        }
+
+      })
+      .catch(err => console.log(err));
+
+    }
+  }
+
+
+  handleFav = (e) => {
 
     const node = e.target;
+    const favFeedback = document.querySelector(".fav-feedback-"+this.props.id)
 
-    FavoritesAPI.createFavorite(props.id)
+    const postId = this.props.id;
+    const userId = localStorage.id;
+
+    FavoritesAPI.toggleFavorites(postId, userId)
     .then(res => {
 
-      if (res.data.warning){
+      if (res.data.success){
 
-        alert(res.data.warning.msg)
 
-      } else if (res.data.success){
+              if(node.classList.contains("fa-heart-o")){
 
-        alert(res.data.success.msg)
+                node.classList.remove("fa-heart-o");
+                node.classList.add("fa-heart")
+
+                favFeedback.style.display = "block";
+                favFeedback.innerHTML = "Added!";
+
+                setInterval(() => {
+                  favFeedback.style.display = "none";
+                }, 2200)
+
+              } else {
+
+                node.classList.remove("fa-heart");
+                node.classList.add("fa-heart-o")
+
+                favFeedback.style.display = "block";
+                favFeedback.innerHTML = "Removed!";
+
+                setInterval(() => {
+                  favFeedback.style.display = "none";
+                }, 2200)
+
+              }
 
       }
+
     })
     .catch(err => {
       if(err.response.status===401) {
@@ -31,46 +91,36 @@ const PostCard = (props) => {
       console.log(err)
     });
 
-    if(node.classList.contains("fa-heart-o")){
-
-      node.classList.remove("fa-heart-o");
-      node.classList.add("fa-heart")
-
-    } else {
-
-      node.classList.remove("fa-heart");
-      node.classList.add("fa-heart-o")
-
-    }
-
   }
 
-
-  return (
-    <Col size="md-6">
-      <div className="PostCard">
-        <Row>
-          <Col size="md-10">
-            <a href={props.url} className="bold-text">
-              <h3>
-                {props.name}
-              </h3>
-            </a>
-            <div className="PostCard-Meta">
-              ${props.price} <span>- Created {props.date}</span>
+  render(){
+    return (
+      <Col size="md-6">
+        <div className="PostCard">
+          <Row>
+            <Col size="md-10">
+              <a href={this.props.url} className="bold-text">
+                <h3>
+                  {this.props.name}
+                </h3>
+              </a>
+              <div className="PostCard-Meta">
+                ${this.props.price} <span>- Created {this.props.date}</span>
+              </div>
+            </Col>
+            <Col size="md-2">
+              <div className="favorite-block">
+                <a href="#/" onClick={this.handleFav}>
+                <i className={this.state.favorite ? "fa fa-heart" : "fa fa-heart-o"} aria-hidden="true"></i>
+              </a>
+              <div className={"fav-feedback-" + this.props.id + " fav-feedback"}></div>
             </div>
           </Col>
-          <Col size="md-2">
-            <div className="favorite-block">
-              <a href="#/" onClick={handleFav}>
-              <i className="fa fa-heart-o" aria-hidden="true"></i>
-            </a>
-          </div>
-        </Col>
-      </Row>
-    </div>
-  </Col>
-)
+        </Row>
+      </div>
+    </Col>
+  )
+}
 }
 
 export default PostCard;

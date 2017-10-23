@@ -76,3 +76,9 @@ a.CategoryCard:hover{
   width: 100%;
   height:100%;
 }
+
+.fav-feedback{
+  font-size:.85rem;
+  display: none;
+  opacity: 1;
+}
