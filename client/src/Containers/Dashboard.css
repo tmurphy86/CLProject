@@ -1,0 +1,19 @@
+.dashboard-heading{
+  position: relative;
+  margin-left:10px;
+  top:-5px;
+  font-size:1.2rem;
+}
+
+.favorite-list{
+  padding:20px 15px;
+  border-bottom:1px solid #ccc;
+}
+
+.favorite-list:first-child{
+  border-top:1px solid #ccc;
+}
+
+.favorite-list:hover{
+  background:#f7f7f7;
+}

@@ -64,6 +64,11 @@ app.use("/api/newpost", new_Post)
 const favorites = require(path.join(__dirname, "routes/favorites-api.js"))
 app.use("/api/favorites", favorites)
 
+// Dashboard
+const dashboard = require(path.join(__dirname, "routes/dashboard-api.js"))
+app.use("/api/dashboard", dashboard)
+
+
 
 //Public Routes
 // -----------------------------------------------------------------------------

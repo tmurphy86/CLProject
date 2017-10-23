@@ -45,7 +45,6 @@ router.get("/:postId/:userId", (req,res) =>{
 })
 
 
-
 module.exports = router;
 
 // Helper Functions
@@ -85,33 +84,3 @@ function checkIfInDb(favObj, actionObj, callback){
       }
     })
   }
-  //
-  // function addToFavorites(favObj, callback){
-  //
-  //   db.favorites.findOne(
-  //     {where: favObj})
-  //     .then(function(favorite){
-  //
-  //       if (favorite != null){
-  //
-  //         favorite.destroy();
-  //         callback({success: {msg: "Post has been removed from your Favorites!"}})
-  //
-  //
-  //       } else {
-  //
-  //         db.favorites.create(
-  //           {
-  //             userId:userId,
-  //             postId:postId
-  //           }
-  //         )
-  //         .then(function(added){
-  //           callback({success: {msg: "Post has been added to your Favorites!"}})
-  //         })
-  //
-  //       }
-  //
-  //     });
-  //
-  //   }
