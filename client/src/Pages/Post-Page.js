@@ -39,7 +39,8 @@ class PostPage extends React.Component {
       postAddressString:"",
       authorInitial:"",
       authorColor:"",
-      authorName:""
+      authorName:"",
+      favorite: false
     }
   };
 
@@ -73,26 +74,66 @@ class PostPage extends React.Component {
       })
 
       console.log(this.state.postId)
-
+      this.checkIfFav(this.state.postId);
     })
     .catch(err => console.log(err));
 
   }
 
+
+  checkIfFav = (postId) => {
+
+    if(Auth.isUserAuthenticated){
+
+      const postId = this.state.postId;
+      const userId = localStorage.id;
+
+      FavoritesAPI.checkIfFavorite(postId, userId)
+      .then(res =>{
+
+        if(res.data){
+          this.setState({
+            favorite: true
+          })
+
+        }
+
+      })
+      .catch(err => console.log(err));
+
+    }
+  }
+
+
+
   handleFav = (e) => {
 
-    FavoritesAPI.createFavorite(this.state.postId)
+    const postId = this.state.postId;
+    const userId = localStorage.id;
+
+    const node = e.target;
+    const heartIcon = node.childNodes[0];
+    const innerText = node.childNodes[1];
+
+    FavoritesAPI.toggleFavorites(postId, userId)
     .then(res => {
 
-      if (res.data.warning){
+      if (res.data.success){
 
-        alert(res.data.warning.msg)
-
-      } else if (res.data.success){
-
-        alert(res.data.success.msg)
+        if (heartIcon.classList.contains("fa-heart-o")){
+          heartIcon.classList.remove("fa-heart-o");
+          heartIcon.classList.add("fa-heart");
+          innerText.textContent = "One of Your Favorites";
+          node.style.background = "#ff377f";
+        } else {
+          heartIcon.classList.remove("fa-heart");
+          heartIcon.classList.add("fa-heart-o");
+          innerText.textContent = "Add to Favorites";
+          node.style.background = "#33a6e2";
+        }
 
       }
+
     })
     .catch(err => {
       if(err.response.status===401) {
@@ -100,6 +141,8 @@ class PostPage extends React.Component {
       }
       console.log(err)
     });
+
+
 
   }
 
@@ -137,62 +180,66 @@ class PostPage extends React.Component {
                   return (<div></div>)
                 } else {
                   return (
-              <ContentCard>
-                <ContentCardBody>
-                  <Row>
-                    <Col size="md-2">
-                      <UserImage color={localStorage.color} initial={localStorage.name.charAt(0)}/>
-                    </Col>
-                    <Col size="md-10">
-                      <PostMessageForm
-                        senderName={localStorage.name}
-                        senderId={localStorage.id}
-                        receiverName={this.state.authorName}
-                        receiverId={this.state.postAuthorId}
-                        postId={this.state.postId}
-                        postTitle={this.state.postTitle}/>
-                    </Col>
-                  </Row>
+                    <ContentCard>
+                      <ContentCardBody>
+                        <Row>
+                          <Col size="md-2">
+                            <UserImage color={localStorage.color} initial={localStorage.name.charAt(0)}/>
+                          </Col>
+                          <Col size="md-10">
+                            <PostMessageForm
+                              senderName={localStorage.name}
+                              senderId={localStorage.id}
+                              receiverName={this.state.authorName}
+                              receiverId={this.state.postAuthorId}
+                              postId={this.state.postId}
+                              postTitle={this.state.postTitle}/>
+                            </Col>
+                          </Row>
 
-                </ContentCardBody>
-              </ContentCard>
-            )
-          }
-        })()}
-            </Col>
-            <Col size="md-4" offset="ml-auto">
-              <div  onClick={this.handleFav} >
-                <SidebarButton href="#/" postId={this.state.postId}><i className="fa fa-heart-o" aria-hidden="true"></i>Add to Favorites</SidebarButton>
-              </div>
-              <ContentCard>
-                {/* Google Map */}
-                <PostMap lat={this.state.postLat} lng={this.state.postLng} />
-              </ContentCard>
-              <div style={{position:'relative', float:'left', width:'100%'}}>
-                <Row>
-                  <Col size="md-3"><strong>Location:</strong></Col>
-                  <Col size="md-8" offset="ml-auto">{this.state.postAddressString}</Col>
-                </Row>
-                <br/>
-                {(() => {
-                  if(this.state.postPhone){
-                    return (
-                      <Row>
-                        <Col size="md-3"><strong>Phone:</strong></Col>
-                        <Col size="md-8" offset="ml-auto">{this.state.postPhone}</Col>
-                      </Row>
-
+                        </ContentCardBody>
+                      </ContentCard>
                     )
                   }
                 })()}
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </Content>
-    )
+              </Col>
+              <Col size="md-4" offset="ml-auto">
+                <div  onClick={this.handleFav} >
+                  {this.state.favorite ?
+                    <SidebarButton href="#/" postId={this.state.postId} background="#ff377f"><i className="fa fa-heart" aria-hidden="true"></i>One of Your Favorites</SidebarButton>
+                    :
+                    <SidebarButton href="#/" postId={this.state.postId}><i className="fa fa-heart-o" aria-hidden="true"></i>Add to Favorites</SidebarButton>
+                  }
+                </div>
+                <ContentCard>
+                  {/* Google Map */}
+                  <PostMap lat={this.state.postLat} lng={this.state.postLng} />
+                </ContentCard>
+                <div style={{position:'relative', float:'left', width:'100%'}}>
+                  <Row>
+                    <Col size="md-3"><strong>Location:</strong></Col>
+                    <Col size="md-8" offset="ml-auto">{this.state.postAddressString}</Col>
+                  </Row>
+                  <br/>
+                  {(() => {
+                    if(this.state.postPhone){
+                      return (
+                        <Row>
+                          <Col size="md-3"><strong>Phone:</strong></Col>
+                          <Col size="md-8" offset="ml-auto">{this.state.postPhone}</Col>
+                        </Row>
+
+                      )
+                    }
+                  })()}
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </Content>
+      )
+    }
   }
-}
 
 
-export default PostPage;
+  export default PostPage;
