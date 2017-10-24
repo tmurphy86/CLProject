@@ -26,7 +26,7 @@ class HeaderNavigation extends React.Component {
                   <a href='#/' onClick={Auth.deauthenticateUser}>Logout</a>
                 </li>
                 <li>
-                  <a href="/dashboard">My Dahsboard</a>
+                  <a href="/dashboard">My Dashboard</a>
                 </li>
               </span>
             )
