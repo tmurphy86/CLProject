@@ -5,7 +5,7 @@
   font-size:1.2rem;
 }
 
-.favorite-list{
+.favorite-list, .message-list{
   padding:20px 15px;
   border-bottom:1px solid #ccc;
 }
@@ -14,6 +14,40 @@
   border-top:1px solid #ccc;
 }
 
-.favorite-list:hover{
+.message-list:last-child{
+  border-top:1px solid #ccc;
+}
+
+.favorite-list:hover,  .message-list:hover{
   background:#f7f7f7;
+}
+
+.card-body-messages{
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  border-top: 1px solid #33a6e2;
+}
+
+.user-image-span{
+  position: relative;
+  float: left;
+  bottom: 10px;
+  margin-right: 20px;
+}
+
+.msg-date{
+  position: relative;
+  margin-left: 40px;
+  opacity: .5;
+}
+
+.msg-date::before{
+  content: "";
+  position: absolute;
+  top:50%;
+  left:-25px;
+  width:15px;
+  height: 2px;
+  background: #557281;
+  opacity: .5;
 }
