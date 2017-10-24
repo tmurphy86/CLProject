@@ -1,6 +1,6 @@
 import React from 'react';
 import Auth from '../modules/Auth';
-import Dashboard from '../Components/Login/Dashboard';
+// import Dashboard from '../Components/Login/Dashboard';
 import { Content, Container, Col, Row, ContentCard, ContentCardHeader, ContentCardBody, UserImage} from "../Components";
 import "./Dashboard.css"
 import {FavoritesAPI, MessageAPI, PostsAPI} from '../API';
@@ -155,7 +155,6 @@ class DashboardPage extends React.Component {
   render() {
     return (
       <Content>
-        {/* <Dashboard secretData={this.state.secretData} /> */}
         <Container>
           <Row>
             <Col size="md-12">
@@ -203,6 +202,7 @@ class DashboardPage extends React.Component {
                       <li className="post-list list-unstyled" key={post.id}>
                         <a href={`/c/${post.categoryId}/post/${post.id}`} className="bold-text">{post.title}</a>
                         <a href="#/" onClick={this.handlePostDelete}><i className="fa fa-times pull-right" aria-hidden="true" data-id={post.id}></i></a>
+                        <a href={`/post/edit/${post.id}`}><i className="fa fa-pencil pull-right" style={{marginRight:15 + "px"}} aria-hidden="true"></i></a>
                       </li>
                     )
                   })}

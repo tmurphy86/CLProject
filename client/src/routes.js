@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch} from "react-router-dom";
 import { LoginPage, SignUpPage, DashboardPage } from './Containers';
 import Auth from './modules/Auth';
-import {PostPage, NewPostPage, CategoriesPage, CategoryPage, SearchPage} from './Pages';
+import {PostPage, NewPostPage, CategoriesPage, CategoryPage, SearchPage, PostEditPage} from './Pages';
 
 
 
@@ -17,6 +17,7 @@ const routes = (
     <Route path="/c/:category/post/:postId(\d)" component={PostPage} />
     <Route path="/search/:query" component={SearchPage} />
     <Route path="/newpost" exact component={Auth.isUserAuthenticated() ? NewPostPage : LoginPage } />
+    <Route path="/post/edit/:id" exact component={Auth.isUserAuthenticated() ? PostEditPage : LoginPage } />
     <Route path="/dashboard" exact component={Auth.isUserAuthenticated() ? DashboardPage : LoginPage}/>
     <Route path="*" component={CategoriesPage} />
   </Switch>

@@ -1,5 +1,5 @@
-import React from 'react';
-import './Buttons.css';
+import React from 'react'
+import './Buttons.css'
 
 const SidebarButton = (props) => {
   return (
@@ -7,4 +7,4 @@ const SidebarButton = (props) => {
   )
 }
 
-export default SidebarButton;
+export default SidebarButton

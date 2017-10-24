@@ -11,6 +11,7 @@ export {default as SidebarButton} from './Buttons/SidebarButton.js';
 
 // Forms
 export {default as PostMessageForm} from './Forms/PostMessageForm.js';
+export {default as EditPostForm} from './Forms/EditPostForm.js';
 export {default as NewPostForm} from './Forms/NewPostForm.js';
 
 // Cards
