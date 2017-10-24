@@ -60,15 +60,15 @@ app.use("/api/favorites", favorites)
 const dashboard = require(path.join(__dirname, "routes/dashboard-api.js"))
 app.use("/api/dashboard", dashboard)
 
-<<<<<<< HEAD
+
 // Dashboard
 const edit_Post = require(path.join(__dirname, "routes/edit-post-api.js"))
 app.use("/api/editpost", edit_Post)
-=======
+
 // Messages
 const messages = require(path.join(__dirname, "routes/messages-api.js"))
 app.use("/api/messages", messages)
->>>>>>> 42f31fcacf4630ec1915d1dd610c5d1c18555d7e
+
 
 
 
