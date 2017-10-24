@@ -3,7 +3,7 @@ import Auth from '../modules/Auth';
 import Dashboard from '../Components/Login/Dashboard';
 import { Content, Container, Col, Row, ContentCard, ContentCardHeader, ContentCardBody, UserImage} from "../Components";
 import "./Dashboard.css"
-import {FavoritesAPI, MessageAPI} from '../API';
+import {FavoritesAPI, MessageAPI, PostsAPI} from '../API';
 
 
 class DashboardPage extends React.Component {
@@ -14,7 +14,8 @@ class DashboardPage extends React.Component {
     this.state = {
       secretData: '',
       favorites:[],
-      messages:[]
+      messages:[],
+      posts:[]
     };
   }
 
@@ -25,6 +26,7 @@ class DashboardPage extends React.Component {
     if(userId){
       this.getUsersFavorites(userId);
       this.getUsersMessages(userId);
+      this.getUsersPosts(userId);
     }
 
   }
@@ -103,6 +105,53 @@ class DashboardPage extends React.Component {
 
   }
 
+  getUsersPosts = (userId) => {
+
+    PostsAPI.getUsersPosts(userId)
+    .then(res => {
+      console.log(res.data)
+      this.setState({
+        posts: res.data
+      })
+    })
+    .catch(err => {
+      if(err.response.status===401) {
+        window.location= '/login'
+      }
+      console.log(err)
+    });
+
+  }
+
+
+  handlePostDelete = (e) => {
+    e.preventDefault();
+
+    const post = e.target.parentNode.parentNode;
+    const userId = localStorage.id;
+    const postId = e.target.dataset.id;
+
+    if (userId){
+
+      PostsAPI.deletePost(postId, userId)
+      .then(res => {
+        console.log(res.data)
+        if(res.data.success){
+          post.remove();
+        }
+
+      })
+      .catch(err => {
+        if(err.response.status===401) {
+          window.location= '/login'
+        }
+        console.log(err)
+      });
+
+    }
+
+  }
+
   render() {
     return (
       <Content>
@@ -143,30 +192,46 @@ class DashboardPage extends React.Component {
                   </div>
                 </ContentCardBody>
               </ContentCard>
-            </Col>
-            <Col size="md-4" offset="ml-auto">
               <ContentCard>
                 <ContentCardHeader>
-                  <i className="fa fa-heart pull-left" aria-hidden="true"></i>
-                  <div className="bold-text pull-left dashboard-heading">Favorites</div>
+                  <i className="fa fa-thumb-tack pull-left" aria-hidden="true"></i>
+                  <div className="bold-text pull-left dashboard-heading">Your Posts</div>
                 </ContentCardHeader>
                 <ContentCardBody>
-                  {this.state.favorites.map((favorite) => {
+                  {this.state.posts.map((post) => {
                     return (
-                      <li className="favorite-list list-unstyled" key={favorite.id}>
-                        <a href={`/c/${favorite.category}/post/${favorite.id}`} className="bold-text">{favorite.name}</a>
-                        <a href="#/" onClick={this.handleFavoriteDelete}><i className="fa fa-times pull-right" aria-hidden="true" data-id={favorite.id}></i></a>
+                      <li className="post-list list-unstyled" key={post.id}>
+                        <a href={`/c/${post.categoryId}/post/${post.id}`} className="bold-text">{post.title}</a>
+                        <a href="#/" onClick={this.handlePostDelete}><i className="fa fa-times pull-right" aria-hidden="true" data-id={post.id}></i></a>
                       </li>
                     )
                   })}
-                </ContentCardBody>
-              </ContentCard>
-            </Col>
-          </Row>
-        </Container>
-      </Content>
-    );
-  }
+              </ContentCardBody>
+            </ContentCard>
+          </Col>
+          <Col size="md-4" offset="ml-auto">
+            <ContentCard>
+              <ContentCardHeader>
+                <i className="fa fa-heart pull-left" aria-hidden="true"></i>
+                <div className="bold-text pull-left dashboard-heading">Favorites</div>
+              </ContentCardHeader>
+              <ContentCardBody>
+                {this.state.favorites.map((favorite) => {
+                  return (
+                    <li className="favorite-list list-unstyled" key={favorite.id}>
+                      <a href={`/c/${favorite.category}/post/${favorite.id}`} className="bold-text">{favorite.name}</a>
+                      <a href="#/" onClick={this.handleFavoriteDelete}><i className="fa fa-times pull-right" aria-hidden="true" data-id={favorite.id}></i></a>
+                    </li>
+                  )
+                })}
+              </ContentCardBody>
+            </ContentCard>
+          </Col>
+        </Row>
+      </Container>
+    </Content>
+  );
+}
 
 }
 

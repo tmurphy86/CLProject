@@ -5,7 +5,7 @@
   font-size:1.2rem;
 }
 
-.favorite-list, .message-list{
+.favorite-list, .message-list, .post-list{
   padding:20px 15px;
   border-bottom:1px solid #ccc;
 }
@@ -18,7 +18,11 @@
   border-top:1px solid #ccc;
 }
 
-.favorite-list:hover,  .message-list:hover{
+.post-list:first-child{
+  border-top:1px solid #ccc;
+}
+
+.favorite-list:hover,  .message-list:hover, .post-title:hover{
   background:#f7f7f7;
 }
 

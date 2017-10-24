@@ -23,5 +23,20 @@ export default{
 
   },
 
+  getUsersPosts: (userId) => {
+    setAuthToken(Auth.getToken());
+    return axios.get(`/api/dashboard/posts/${userId}`);
+
+  },
+
+  deletePost: (postId, userId) => {
+
+    setAuthToken(Auth.getToken());
+    return axios.delete(`/api/dashboard/posts/delete/${userId}/${postId}`);
+
+  },
+
+
+
 
 }
