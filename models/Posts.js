@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true
         },
         phone: {
-            type: DataTypes.BIGINT(11),
+            type: DataTypes.STRING,
             allowNull: true
         },
         price: {
