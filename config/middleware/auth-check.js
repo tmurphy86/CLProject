@@ -1,10 +1,7 @@
 const jwt = require('jsonwebtoken');
 const db = require('../../models');
 
-
-/**
- *  The Auth Checker middleware function.
- */
+//JWT Token Verification before allowing DB access for APIs
 module.exports = (req, res, next) => {
   if (!req.headers.authorization) {
     return res.status(401).end();

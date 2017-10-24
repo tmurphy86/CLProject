@@ -15,6 +15,16 @@
   opacity: .5;
 }
 
+.error-message{
+  margin: auto;
+  text-align: center;
+}
+
+.success-message{
+  margin: auto;
+  text-align: center;
+}
+
 .field-line{
   width: 100%;
   position: relative;
@@ -26,8 +36,6 @@
 .field-line input{
   padding: 10%;
   width: 100%;
-  /*margin: auto;*/
-  /*float: left;*/
 }
 
 .button-line{
@@ -35,7 +43,6 @@
   font-size: 1.5rem;
   text-align: center;
   width: 100%;
-  /*height:100%;*/
 }
 .account-line{
 text-align: center;
