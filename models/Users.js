@@ -1,10 +1,9 @@
 var securePassword = require('secure-password');
-// Initialise our password policy
 var pwd = securePassword();
 
+//Model for user
 module.exports = function(sequelize, DataTypes) {
-
-  let User = sequelize.define('user',
+  const User = sequelize.define('user',
   {
     name: {
       type: DataTypes.STRING,
@@ -17,6 +16,18 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
+        isUnique: function(value, next) {
+           User.find({
+                   where: {email: value},
+                   attributes: ['id']
+               }).done(function(error, user) {
+                       if (error)
+                           return next(error);
+                       if (user)
+                           return next('Email address already in use!');
+                       next();
+                     });
+                   },
         isEmail: true,
         notEmpty: true
       }
@@ -44,23 +55,23 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: '#607d8b'
     },
   });
-  // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
-    User.prototype.validPassword = function(password) {
-      return pwd.verifySync(Buffer.from(password), Buffer.from(this.password));
-    };
 
+// Password validation method
+User.prototype.validPassword = function(password) {
+    return pwd.verifySync(Buffer.from(password), Buffer.from(this.password));
+  };
 
-    // Hooks are automatic methods that run during various phases of the User Model lifecycle
-// In this case, before a User is created, we will automatically hash their password
-    User.hook("beforeCreate", function(user) {
-
-      var userPassword = Buffer.from(user.password);
-        // if (!user.isModified('password')) return user();
-      // Register user
-      var hash = pwd.hashSync(userPassword);
-      var result = pwd.verifySync(userPassword, hash);
-      user.password=hash;
-    });
+    //Before create users password is hashed using argon2 and a color is assigned
+User.hook("beforeCreate", function(user) {
+    //assigns user random color on signup
+    const userColorArray = ['#dc3545 ', '#f44336 ', '#9c27b0 ', '#673ab7 ', '#3f51b5 ', '#2196f3 ', '#009688 ', '#4caf50 ', '#8bc34a ', '#cddc39 ', '#ffc107 ', '#ff9800 ', '#ff5722 ', '#607d8b ']
+    const randColor = userColorArray[Math.floor(Math.random() * userColorArray.length)];
+    user.color=randColor;
+    var userPassword = Buffer.from(user.password);
+    var hash = pwd.hashSync(userPassword);
+    var result = pwd.verifySync(userPassword, hash);
+    user.password=hash;
+  });
 
   return User;
 }
