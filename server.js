@@ -1,6 +1,5 @@
 require('dotenv-safe').load();
 const path = require('path')
-const xps = require("./xps.js")
 const bodyParser = require('body-parser');
 const session = require('express-session')
 const passport = require('passport');
@@ -9,14 +8,7 @@ const express = require('express');
 
 const app = express();
 
-let PORT = process.env.PORT || 3001;
-
-// xps.go(app,
-//   {
-//     cookieParse: true,
-//     httpLogger: "morgan",
-//   }
-// )
+const PORT = process.env.PORT || 3001;
 
 // parse various different custom JSON types as JSON
 app.use(bodyParser.json({ type: 'application/*+json' }))
@@ -68,9 +60,15 @@ app.use("/api/favorites", favorites)
 const dashboard = require(path.join(__dirname, "routes/dashboard-api.js"))
 app.use("/api/dashboard", dashboard)
 
+<<<<<<< HEAD
 // Dashboard
 const edit_Post = require(path.join(__dirname, "routes/edit-post-api.js"))
 app.use("/api/editpost", edit_Post)
+=======
+// Messages
+const messages = require(path.join(__dirname, "routes/messages-api.js"))
+app.use("/api/messages", messages)
+>>>>>>> 42f31fcacf4630ec1915d1dd610c5d1c18555d7e
 
 
 
@@ -93,20 +91,7 @@ app.use("/public/api", post_Page)
 const search = require(path.join(__dirname, "routes/search-api.js"))
 app.use("/public/api/search", search)
 
-// Messages
-const messages = require(path.join(__dirname, "routes/messages-api.js"))
-app.use("/api/messages", messages)
-
-
-// // Display 404 for unrecognized Routes
-// app.get('*', function(req, res){
-//   res.sendFile(path.join(__dirname+'client/build/index.html'));
-//   console.log(req.cookies.cookieId)
-// });
-
-
 // Database Models
-// -----------------------------------------------------------------------------
 let db = require('./models')
 
 
