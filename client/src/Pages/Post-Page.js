@@ -178,9 +178,17 @@ class PostPage extends React.Component {
                 </ContentCardBody>
               </ContentCard>
               {(() => {
-                if(!Auth.isUserAuthenticated() || parseInt(this.state.postAuthorId) === parseInt(localStorage.id)){
+                if(!Auth.isUserAuthenticated()){
+                  return (
+                    <ContentCard>
+                      <ContentCardBody>
+                        See something you like? <a href="/login">Sign in</a> or <a href="/signup">Register</a> to leave {this.state.authorName} a message.
+                      </ContentCardBody>
+                    </ContentCard>
+                  )
+                } else if(parseInt(this.state.postAuthorId) === parseInt(localStorage.id)){
                   return (<div></div>)
-                } else {
+                }else {
                   return (
                     <ContentCard>
                       <ContentCardBody>
