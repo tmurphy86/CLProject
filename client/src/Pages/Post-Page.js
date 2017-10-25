@@ -51,7 +51,9 @@ class PostPage extends React.Component {
     PostsAPI.grabPostData(postId)
     .then( res => {
 
-      console.log(this.state.postId)
+      if (!res.data){
+        window.location = "/"
+      }
 
       this.setState({
         postId:res.data.id,
@@ -73,7 +75,7 @@ class PostPage extends React.Component {
         authorName: res.data.authorName
       })
 
-      console.log(this.state.postId)
+
       this.checkIfFav(this.state.postId);
     })
     .catch(err => console.log(err));

@@ -89,7 +89,7 @@ router.get("/:id", (req, res)=>{
 
     } else {
 
-      res.json("NO POST FOUND")
+      res.json(false)
 
     }
 
