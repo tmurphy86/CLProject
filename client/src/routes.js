@@ -14,7 +14,7 @@ const routes = (
     <Route path="/signup" exact component={SignUpPage}/>
     <Route exact path="/c/:category" component={CategoryPage} />
     {/* The (\d) is a regular expression that makes sure that the Post route parameter is an integer. */}
-    <Route path="/c/:category/post/:postId(\d)" component={PostPage} />
+    <Route path="/c/:category/post/:postId(\d+)" component={PostPage} />
     <Route path="/search/:query" component={SearchPage} />
     <Route path="/newpost" exact component={Auth.isUserAuthenticated() ? NewPostPage : LoginPage } />
     <Route path="/post/edit/:id" exact component={Auth.isUserAuthenticated() ? PostEditPage : LoginPage } />
