@@ -11,6 +11,7 @@ router.get("/favorites/:userId", (req,res) =>{
 
   const userId = req.params.userId;
 
+
   getAllTheFavoritesId(userId, (favs)=>{
 
     if(favs){

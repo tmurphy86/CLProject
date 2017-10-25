@@ -53,8 +53,10 @@ class DashboardPage extends React.Component {
 
   getUsersFavorites = (userId) => {
 
+
     FavoritesAPI.getUsersFavorites(userId)
     .then(res => {
+
       this.setState({
         favorites: res.data
       })
@@ -67,7 +69,7 @@ class DashboardPage extends React.Component {
 
     MessageAPI.getUsersMessages(userId)
     .then(res => {
-      console.log(res.data)
+
       this.setState({
         messages: res.data
       })
@@ -109,7 +111,7 @@ class DashboardPage extends React.Component {
 
     PostsAPI.getUsersPosts(userId)
     .then(res => {
-      console.log(res.data)
+
       this.setState({
         posts: res.data
       })
@@ -135,7 +137,7 @@ class DashboardPage extends React.Component {
 
       PostsAPI.deletePost(postId, userId)
       .then(res => {
-        console.log(res.data)
+
         if(res.data.success){
           post.remove();
         }
@@ -175,16 +177,18 @@ class DashboardPage extends React.Component {
 
                     { this.state.messages.map((message) => {
                       return (
-                        <div>
+                        <div key={message.id}>
                           <a data-toggle="collapse" href={"#message-"+message.id} aria-expanded="false" className="message-toggle bold-text">
                             <li className="message-list list-unstyled" key={message.id} role="tab">
                               <span className="user-image-span"><UserImage color={localStorage.color} initial={message.senderName.charAt(0)} /></span>
                               <span className="">{message.senderName}</span>
-                              <span className="pull-right">{message.postTitle}  <span className="msg-date">{message.updatedAt}</span></span>
+                              <span className="msg-date pull-right">{message.updatedAt}</span>
                             </li>
                           </a>
-                          <div id={"message-"+message.id} class="collapse" role="tabpanel" data-parent="#accordion">
+                          <div id={"message-"+message.id} className="collapse" role="tabpanel" data-parent="#accordion">
                             <div className="card-body card-body-messages">
+                              <div className="bold-text">{message.postTitle} </div>
+                              <br/>
                               {message.messageVal}
                             </div>
                           </div>
@@ -223,8 +227,7 @@ class DashboardPage extends React.Component {
                 </ContentCardHeader>
                 <ContentCardBody>
 
-                  {this.state.favorites.length === 0 ? <p className="text-center">No Favorites Yet</p> : ""}
-
+                  {this.state.favorites.length === 0 ? <p className="text-center">No Favorites</p> : ""}
                   {this.state.favorites.map((favorite) => {
                     return (
                       <li className="favorite-list list-unstyled" key={favorite.id}>
