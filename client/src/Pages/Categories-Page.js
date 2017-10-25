@@ -27,7 +27,7 @@ class CategoriesPage extends React.Component {
 
     CategoryAPI.grabCategories()
     .then( res => {
-      console.log(res.data)
+
       this.setState({
         categories: res.data
       })

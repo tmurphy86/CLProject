@@ -49,6 +49,7 @@ module.exports = function(sequelize, DataTypes) {
     Posts.associate = function(models) {
         Posts.belongsTo(models.user, {});
         Posts.belongsTo(models.categories, {});
+        Posts.hasMany(models.favorites,{onDelete: 'cascade', hooks: true})
     };
 
     return Posts;
