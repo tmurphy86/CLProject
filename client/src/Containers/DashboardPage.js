@@ -170,7 +170,10 @@ class DashboardPage extends React.Component {
                 </ContentCardHeader>
                 <ContentCardBody>
                   <div id="accordion" role="tablist">
-                    {this.state.messages.map((message) => {
+
+                    {this.state.messages.length === 0 ? <p className="text-center">No Messages</p> : ""}
+
+                    { this.state.messages.map((message) => {
                       return (
                         <div>
                           <a data-toggle="collapse" href={"#message-"+message.id} aria-expanded="false" className="message-toggle bold-text">
@@ -197,6 +200,9 @@ class DashboardPage extends React.Component {
                   <div className="bold-text pull-left dashboard-heading">Your Posts</div>
                 </ContentCardHeader>
                 <ContentCardBody>
+
+                  {this.state.posts.length === 0 ? <p className="text-center">You haven't made any posts yet! <a href="/newpost" className="bold-text">Make one now.</a></p> : ""}
+
                   {this.state.posts.map((post) => {
                     return (
                       <li className="post-list list-unstyled" key={post.id}>
@@ -206,32 +212,35 @@ class DashboardPage extends React.Component {
                       </li>
                     )
                   })}
-              </ContentCardBody>
-            </ContentCard>
-          </Col>
-          <Col size="md-4" offset="ml-auto">
-            <ContentCard>
-              <ContentCardHeader>
-                <i className="fa fa-heart pull-left" aria-hidden="true"></i>
-                <div className="bold-text pull-left dashboard-heading">Favorites</div>
-              </ContentCardHeader>
-              <ContentCardBody>
-                {this.state.favorites.map((favorite) => {
-                  return (
-                    <li className="favorite-list list-unstyled" key={favorite.id}>
-                      <a href={`/c/${favorite.category}/post/${favorite.id}`} className="bold-text">{favorite.name}</a>
-                      <a href="#/" onClick={this.handleFavoriteDelete}><i className="fa fa-times pull-right" aria-hidden="true" data-id={favorite.id}></i></a>
-                    </li>
-                  )
-                })}
-              </ContentCardBody>
-            </ContentCard>
-          </Col>
-        </Row>
-      </Container>
-    </Content>
-  );
-}
+                </ContentCardBody>
+              </ContentCard>
+            </Col>
+            <Col size="md-4" offset="ml-auto">
+              <ContentCard>
+                <ContentCardHeader>
+                  <i className="fa fa-heart pull-left" aria-hidden="true"></i>
+                  <div className="bold-text pull-left dashboard-heading">Favorites</div>
+                </ContentCardHeader>
+                <ContentCardBody>
+
+                  {this.state.favorites.length === 0 ? <p className="text-center">No Favorites Yet</p> : ""}
+
+                  {this.state.favorites.map((favorite) => {
+                    return (
+                      <li className="favorite-list list-unstyled" key={favorite.id}>
+                        <a href={`/c/${favorite.category}/post/${favorite.id}`} className="bold-text">{favorite.name}</a>
+                        <a href="#/" onClick={this.handleFavoriteDelete}><i className="fa fa-times pull-right" aria-hidden="true" data-id={favorite.id}></i></a>
+                      </li>
+                    )
+                  })}
+                </ContentCardBody>
+              </ContentCard>
+            </Col>
+          </Row>
+        </Container>
+      </Content>
+    );
+  }
 
 }
 
