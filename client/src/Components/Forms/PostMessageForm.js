@@ -42,8 +42,11 @@ class PostMessageForm extends React.Component {
 
         if (res.data.success){
           feedback.innerHTML = `<span class="text-success">${res.data.success.msg}</span>`
+          this.setState({
+            messageVal:""
+          })
         }
-        
+
         if (res.data.error){
           feedback.innerHTML = `<span class="text-danger">${res.data.error.msg}</span>`
         }
