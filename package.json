@@ -4,13 +4,20 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "npm run test && node server.js",
+    "test": "mocha",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SavSamoylov/CL.git"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3"
   },
   "author": "Saveliy Samoylov, Tim Murphy, Olga Anderjaska",
   "license": "ISC",
