@@ -1,72 +1,67 @@
-CL.js
-===========
-A React/Nodejs application that is a rebuild of the classic CraigsList Website using some of the latest development frameworks.
+# Craigslist 2.0
+
+A scaled down version of Craigslist with an improved UI that stays true to the originals minimal aesthetic.
+
+Built using the <b>MySQL, React, Express, and Node</b> stack.
+
+## User Flows and Some of the Functionality
+
+#### 1) Front Page, Categories Page, Post Page, Messaging, Favoriting
+
+![Alt text](/client/public/imgs/clGif1.gif?raw=true "Front Page, Categories Page, Post Page, Messaging, Favoriting")
+
+#### 2) Search Results, Favoriting, Dashboard
+![Alt text](/client/public/imgs/clGif2.gif?raw=true "Search Results and Favoriting Functionality")
+
+#### 3) Create Post, Delete/Edit Post
+![Alt text](/client/public/imgs/clGif3.gif?raw=true "Create Post, Delete/Edit Post")
 
 ## General Overview
 
-**`CL.js`** is a react/express website on [Node.js](https://nodejs.org/) and mySQL datastore.
 
-Dependenancies:
+### Tech Used:
 
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.17.2",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.4.3",
-    "dotenv-safe": "^4.0.4",
-    "express": "^4.15.4",
-    "express-handlebars": "^3.0.0",
-    "express-session": "^1.15.5",
-    "express-validator": "^3.2.1",
-    "moment": "^2.18.1",
-    "morgan": "^1.8.2",
-    "mysql2": "^1.4.1",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
-    "sequelize": "^4.7.5"
+- ReactJS
+- Node.js
+- Express
+- MySQL
+- sequelize
+- React Router
+- NPM/Yarn
+- PassportJS
+- Argon2
+- Mocha and Chai
+- Morgan
+- Axios
+- Google Maps API
+- Bootstrap 4
+- WebPacks
+- View packages.json files for list of other dependencies.
+
 
 Change Log:
 	v. 0.1 - Deployed to Heroku
 
-Testing:
-
-###Deployment Locally:
-
-starting `node `
-
-Update your local .env at the top level with the following local information:
-NODE_ENV=
-
-DB_DIALECT=
-DB_USERNAME=
-DB_PASSWORD=
-DB_DATABASE=
-DB_HOST=
-DB_PORT=
-
-## [Documentation](#documentation)
-<a name="documentation"></a>
-
-### Installation
-<a name="installation"></a>
-
-``` shell
-npm install
-```
-
-### Run
-<a name="run"></a>
-
-``` shell
-node 
-```
+### Minimum Goals
+- Authentication using Passport
+- Ability to view Posts without authentication
+- Login / Signup
+- Create Post page
+- Location using Google API
+- Create Dashboard Page
+- Create Category, Posts, and Search Results Page
 
 
-A store with command line interface store w/ a connected SQL Database
-
-## Table of Contents
-
-  1. [Documentation](#documentation)
-    1. [Installation](#installation)
-    2. [Run](#run)
-    3. [Examples](#examples)
-
+### Stretch Goals
+- Authentication - Social Media (FB, Google)
+- <b>Testing (X) - Achieved</b>
+- Image Upload’s
+ - Posts and User Images
+- <b>Messaging Poster in private queue (X) - Achieved</b>
+- Edit personal info
+- Ability to Rate Users
+- <b>Ability to Favorite Posts (X) - Achieved</b>
+- MongoDB for Archiving
+- Additional attributes for Posts
+- User Location Detection
+- UI Mobile friendly
